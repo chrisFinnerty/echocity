@@ -11,26 +11,39 @@
     display: block;
     width: 100%;
     height: 110px;
-    border: 1px solid #ddd;
+    border: 1px solid #646cff;
     border-radius: 8px;
     padding: 2rem;
     margin-bottom: 1rem;
     transition: transform 0.15s;
+    overflow: hidden;
 }
 
 .EventCard-img-header-container{
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
     height: 110px;
-    border: 2px solid #646cff;
-    border-radius: 6px;
+    /* border: 2px solid #646cff; */
+    /* border-radius: 6px; */
+    gap: 1rem;
 }
 
 .EventCard-img-header-container h2{
     margin: 0 auto;
     font-weight: 700;
+}
+
+.EventCard-details {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
 }
 
 .EventCard-img-container {
@@ -47,23 +60,34 @@
 }
 
 .EventCard-event-name {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    font-size: 15px;
-    margin-left: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .EventCard-event-card:hover {
     transform: translateY(-2px);
 }
 
-.EventCard-event-link {
-    display: inline-block;
+.EventCard-event-venue span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.EventCard-event-url {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     text-decoration: none;
     border-radius: 4px;
+    background-color: #646cff;
+    color: #fff;
+}
+
+.EventCard-event-url a:hover {
+    color: black;
 }
 
 .date-icon {

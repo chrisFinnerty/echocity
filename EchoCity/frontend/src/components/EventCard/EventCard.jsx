@@ -16,18 +16,12 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                             />
                         )}
                     </div>
-                    <div className="EventCard-event-name">{eventName}</div>
-                    <div className='EventCard-artists'>
-                        <h3>
-                            <ul>
-                                {artists?.map(artist => (
-                                    <li key={artist.artistId}>{artist.artistName}</li>
-                                ))}
-                            </ul>
-                        </h3>
-                    </div>
-                    <ul className='EventCard-event-date'>
-                        <li>
+                    <div className="EventCard-details">
+                        <div className="EventCard-event-name">{eventName}</div>
+                        <div className='EventCard-artists'>
+                                {artists?.map(artist => artist.artistName).join(", ")}
+                        </div>
+                        <div className='EventCard-event-date'>
                             <img 
                                 src="/images/date-icon.svg" 
                                 alt="Calendar icon"
@@ -35,13 +29,13 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                                 width="25" 
                                 height="25"
                             />
-                            {formatDate(eventDate)}
-                        </li>
-                    </ul>
-                    <ul className='EventCard-event-venue'>
-                        <li>{venueName || 'Venue TBD'}</li>
-                        <li>{`${city}, ${state}` || 'Venue TBD'}</li>
-                    </ul>
+                            <span>{formatDate(eventDate)}</span>
+                        </div>
+                        <div className='EventCard-event-venue'>
+                            <span>{venueName || 'Venue TBD'}</span>
+                            <span>{`${city}, ${state}` || 'Venue TBD'}</span>
+                        </div>
+                    </div>
                     <a className='EventCard-event-url' href={eventUrl}>
                         Ticketmaster Link
                     </a>
