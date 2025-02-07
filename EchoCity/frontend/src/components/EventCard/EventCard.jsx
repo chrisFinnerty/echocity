@@ -4,7 +4,7 @@ import './EventCard.css';
 const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, state, eventUrl, imageUrl }) => {
     return (
         <div key={eventId} className='EventCard'>
-            <div className='EventCard-event-card'>
+            <div className='EventCard-card'>
                 <div className="EventCard-img-header-container">
                     <div className="EventCard-img-container">
                         {imageUrl && (

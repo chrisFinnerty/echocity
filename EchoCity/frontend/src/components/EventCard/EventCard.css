@@ -7,13 +7,13 @@
     width: 100%;
 }
 
-.EventCard-event-card {
+.EventCard-card {
     display: block;
     width: 100%;
-    height: 110px;
+    height: 150px;
     border: 1px solid #646cff;
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1rem;
     margin-bottom: 1rem;
     transition: transform 0.15s;
     overflow: hidden;

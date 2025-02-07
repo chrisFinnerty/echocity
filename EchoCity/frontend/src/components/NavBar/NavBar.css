@@ -1,0 +1,25 @@
+.NavBar {
+    border-bottom: 1.5px solid rgb(255, 255, 255);
+    height: 6%;
+}
+
+#NavBar-echo-logo {
+    padding-top: 15px;
+}
+
+.nav-item {
+    margin-left: 15px;
+}
+.nav-item a {
+    color: white;
+    font-size: 18px;
+}
+
+.nav-item a:hover {
+    color: #646cff;
+}
+
+.navbar-brand {
+    margin-left: 15px;
+    color: white;
+}
