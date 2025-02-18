@@ -11,8 +11,7 @@
     display: block;
     width: 100%;
     height: 150px;
-    border: 1px solid #646cff;
-    border-radius: 8px;
+    border-bottom: 1px solid #646cff;
     padding: 1rem;
     margin-bottom: 1rem;
     transition: transform 0.15s;
@@ -26,8 +25,6 @@
     align-items: flex-start;
     width: 100%;
     height: 110px;
-    /* border: 2px solid #646cff; */
-    /* border-radius: 6px; */
     gap: 1rem;
 }
 
@@ -37,7 +34,6 @@
 }
 
 .EventCard-details {
-    margin-left: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,6 +47,7 @@
     height: 110px;
     object-fit: contain;
     border-radius: 50%;
+    margin-right: 30px;
 }
 
 .EventCard-event-image {
@@ -78,16 +75,26 @@
 }
 
 .EventCard-event-url {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 4px;
-    background-color: #646cff;
-    color: #fff;
+    margin-top: 1.4rem;
 }
 
-.EventCard-event-url a:hover {
-    color: black;
+.EventCard-event-url button {
+    display: inline-block;
+    width: 130px;          
+    height: 2.5rem;        
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    background-color: #646cff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 0 0.5rem;
+  }
+
+.EventCard-event-url:hover {
+    border-color: rgb(255, 255, 255);
 }
 
 .date-icon {

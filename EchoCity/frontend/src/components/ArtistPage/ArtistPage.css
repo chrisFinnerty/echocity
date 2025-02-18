@@ -1,0 +1,57 @@
+.ArtistPage {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ArtistPage-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+.ArtistPage-img-container {
+    height: 200px;
+    width: 300px;
+    object-fit: contain;
+}
+
+.ArtistPage-name {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ArtistPage h2 {
+    align-self: center;
+    margin: auto 0;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.ArtistPage-artist-image {
+    border: 2px solid #646cff;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 4 / 3;
+}
+
+.ArtistPage-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    flex: 1;
+    min-width: 0;
+}
+
+.ArtistPage-events-container {
+    display: block;
+    gap: 2rem;
+    margin-top: 1rem;
+}

@@ -1,22 +1,21 @@
 import axios from 'axios';
+import BaseAPI from './BaseAPI';
 
-class TicketMasterAPI {
+class TicketMasterAPI extends BaseAPI {
+
+    // Events from PSQL DB pulled from TM API
     static async getEvents(filters = {}) {
       try {
-        console.log("RUNNING getEvents");
-        const res = await axios.get('/api/events', { 
-          params: {
-            // Map frontend filters to database fields
-            city: filters.city,
-            genre: filters.genre,
-            subgenre: filters.subgenre,
-          }
+        const res = await this.request({ 
+          endpoint: 'api/events', 
+          data: { 
+            city: filters.city, 
+            genre: filters.genre, 
+            subgenre: filters.subgenre 
+          } 
         });
-
-        console.log(res.data.rows);
         
-        // Transform to match existing frontend structure
-        return res.data?.rows || [];
+        return res.data || [];
         
       } catch (err) {
         console.error("Failed to fetch events:", err);
@@ -33,6 +32,27 @@ class TicketMasterAPI {
         };
       } catch (err) {
         console.error("Failed to fetch event details:", err);
+        return null;
+      }
+    }
+
+    static async getEventsByArtistId(id){
+      try{
+        const res = await this.request({ endpoint: `api/artists/${id}/events` });
+
+        return res.data || [];
+      } catch(err){
+        console.error("Failed to fetch events for the artist", err);
+      }
+    }
+
+    // Artists from PSQL DB pulled from TM API
+    static async getArtist(id) {
+      try{
+        const res = await this.request({ endpoint: `api/artists/${id}` });
+        return res.data;
+      } catch(err){
+        console.error("Failed to fetch artist details", err);
         return null;
       }
     }

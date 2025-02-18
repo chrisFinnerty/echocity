@@ -1,6 +1,7 @@
 .NavBar {
-    border-bottom: 1.5px solid rgb(255, 255, 255);
-    height: 6%;
+    border-bottom: 2.5px solid rgb(255, 255, 255);
+    height: 7%;
+    background-color: rgb(0, 0, 0);
 }
 
 #NavBar-echo-logo {
@@ -10,6 +11,7 @@
 .nav-item {
     margin-left: 15px;
 }
+
 .nav-item a {
     color: white;
     font-size: 18px;

@@ -1,0 +1,48 @@
+.Profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 12px;
+}
+
+.Profile-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin-top: 5%;
+    border: 2px solid #666;
+    width: 50%;
+}
+
+.Profile h2 {
+    font-weight: bolder;
+    
+}
+
+.Profile-details {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+    flex: 1;
+    min-width: 0;
+}
+
+.Profile img {
+    width: 200px;
+    height: 120px;
+}
+
+.Profile-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.Profile-btn-container button {
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: #646cff;
+}

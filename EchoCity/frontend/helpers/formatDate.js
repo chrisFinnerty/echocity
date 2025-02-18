@@ -7,4 +7,25 @@ const formatDate = (dateString) => {
     return `${month}-${day}-${year}`; // Output: "02-07-2025"
   };
 
-export default formatDate;
+  const formatDateHeaders = (timestamp) => {
+    return new Date(timestamp).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatDateMY = (date) => {
+    const isoDate = date.includes('T') ? date : date.replace(' ', 'T');
+    
+    return new Date(isoDate).toLocaleString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+  };
+
+export {
+  formatDate,
+  formatDateHeaders,
+  formatDateMY
+};

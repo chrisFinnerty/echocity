@@ -1,21 +1,49 @@
+import { useContext } from 'react';
+import Context from '../Context';
+import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Logo from './Logo';
 import './NavBar.css';
 
-const NavBar = () => {
+const NavBar = ({ logout }) => {
+    const {currentUser} = useContext(Context);
+    
     return (
         <>
-        <Navbar fixed='top' className='NavBar' color='dark' dark expand="md">
-            <NavbarBrand href='/' id='NavBar-echo-logo'><Logo /></NavbarBrand>
-            <Nav className='ms-auto' navbar>
-                <NavItem>
-                    <NavLink href='/register'>Signup</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink href='/login'>Login</NavLink>
-                </NavItem>
-            </Nav>
-        </Navbar>
+        {currentUser ? (
+            <Navbar fixed='top' className='NavBar' dark expand="md">
+                <NavbarBrand tag={Link} to='/' id='NavBar-echo-logo'><Logo /></NavbarBrand>
+                <Nav className='ms-auto' navbar>
+                    <NavItem>
+                        <NavLink tag={Link} to={`/events`}>Discover</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to='/'>Favorite Artists</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to='/'>Concerts</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to='/' onClick={logout}>Logout</NavLink>
+                    </NavItem>
+                </Nav>
+            </Navbar>
+        ) : (
+            <Navbar fixed='top' className='NavBar' dark expand="md">
+                <NavbarBrand href='/' id='NavBar-echo-logo'><Logo /></NavbarBrand>
+                <Nav className='ms-auto' navbar>
+                    <NavItem>
+                        <NavLink tag={Link} to='/signup'>Sign Up</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to='/login'>Login</NavLink>
+                    </NavItem>
+                </Nav>
+            </Navbar>
+        )}
         </>
     )
 }
