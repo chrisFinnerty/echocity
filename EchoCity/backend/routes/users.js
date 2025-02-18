@@ -24,7 +24,7 @@ router.get('/:id', async function(req, res, next){
     }
 });
 
-// Implement middleware - ensureCorrectUser and ensureLoggedIn??
+// Implement middleware - ensureCorrectUser and ensureLoggedIn
 router.patch('/:id', ensureLoggedIn, ensureCorrectUser, async function(req, res, next){
     try{
         const validator = jsonschema.validate(req.body, userUpdateScema);
