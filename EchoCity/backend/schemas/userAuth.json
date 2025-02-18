@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "title": "User Auth Schema",
+    "type": "object",
+    "default": {},
+    "required": [
+        "email",
+        "password"
+    ],
+    "properties": {
+        "email": {
+            "title": "The email Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "test@gmail.com"
+            ]
+        },
+        "password": {
+            "title": "The password Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "cats123"
+            ]
+        }
+    },
+    "examples": [{
+        "email": "test@gmail.com",
+        "password": "cats123"
+    }]
+}

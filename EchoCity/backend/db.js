@@ -1,8 +1,8 @@
 
 /** Database setup for echocity. */
-
-import { Client } from 'pg';
-import { getDatabaseUri } from './config';
+import pkg from 'pg';
+const { Client } = pkg;
+import { getDatabaseUri } from './config.js';
 
 let db;
 

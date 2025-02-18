@@ -1,0 +1,83 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "title": "User Signup Schema",
+    "type": "object",
+    "default": {},
+    "required": [
+        "username",
+        "email",
+        "password",
+        "firstName",
+        "lastName",
+        "city",
+        "state"
+    ],
+    "properties": {
+        "username": {
+            "title": "The username Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "FunkyCat"
+            ]
+        },
+        "email": {
+            "title": "The email Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "test@gmail.com"
+            ]
+        },
+        "password": {
+            "title": "The password Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "cats123"
+            ]
+        },
+        "firstName": {
+            "title": "The first_name Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "Funky"
+            ]
+        },
+        "lastName": {
+            "title": "The last_name Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "Cat"
+            ]
+        },
+        "city": {
+            "title": "The city Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "Los Angeles"
+            ]
+        },
+        "state": {
+            "title": "The state Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "CA"
+            ]
+        }
+    },
+    "examples": [{
+        "username": "FunkyCat",
+        "email": "test@gmail.com",
+        "password": "cats123",
+        "firstName": "Funky",
+        "lastName": "Cat",
+        "city": "Los Angeles",
+        "state": "CA"
+    }]
+}

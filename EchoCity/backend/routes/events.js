@@ -1,61 +1,26 @@
 import express from 'express';
-import pkg from 'pg';
-import { config } from 'dotenv';
+import Event from '../models/event.js';
 const router = express.Router();
 
-const {Pool} = pkg;
-config();
+// const {Pool} = pkg;
+// config();
 
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
-});
+// const pool = new Pool({
+//     user: process.env.DB_USER,
+//     host: process.env.DB_HOST,
+//     database: process.env.DB_NAME,
+//     password: process.env.DB_PASSWORD,
+//     port: process.env.DB_PORT
+// });
 
 // GET Events from Database
 router.get('/', async (req, res) => {
     try {
       const { city, genre, subgenre } = req.query;
-      
-      const query = `
-        SELECT 
-          e.id as "eventId",
-          e.name as "eventName",
-          e.date as "eventDate",
-          e.url,
-          e.image_url as "imageUrl",
-          v.id as "venueId",
-          v.name as "venueName",
-          v.city,
-          v.state,
-          v.latitude,
-          v.longitude,
-          json_agg(json_build_object(
-            'artistId', a.id,
-            'artistName', a.name,
-            'genre', a.genre,
-            'subgenre', a.subgenre
-          )) as artists
-        FROM events e
-        JOIN venues v ON e.venue_id = v.id
-        JOIN event_artists ea ON e.id = ea.event_id
-        JOIN artists a ON ea.artist_id = a.id
-        WHERE
-          e.date >= NOW() AND
-          ($1::text IS NULL OR v.city ILIKE $1) AND
-          ($2::text IS NULL OR $2 ILIKE ANY(a.genre)) AND
-          ($3::text IS NULL OR $3 ILIKE ANY(a.subgenre))
-        GROUP BY e.id, v.id
-        ORDER BY e.date
-        LIMIT 100
-      `;
-  
-      const { rows } = await pool.query(query, [city, genre, subgenre]);
-      console.log(rows);
-  
-      return res.json({ rows });
+
+      const events = await Event.getEvents({ city, genre, subgenre });
+    
+      return res.json({ data: events });
       
     } catch (err) {
       console.error('Database query error:', err);
@@ -95,7 +60,7 @@ router.get('/', async (req, res) => {
         GROUP BY e.event_id, v.venue_id
       `;
   
-      const { rows } = await pool.query(eventQuery, [req.params.id]);
+      // const { rows } = await db.query(eventQuery, [req.params.id]);
       
       if (rows.length === 0) {
         return res.status(404).json({ error: 'Event not found' });

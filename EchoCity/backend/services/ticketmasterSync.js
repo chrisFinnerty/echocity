@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import pkg from 'pg';
+import cron from 'node-cron';
 import { config } from 'dotenv';
 
 const { Pool } = pkg;
@@ -135,19 +136,26 @@ async function processEvent(eventData){
     for (const artist of event.artists){
       // Insert artist
       await client.query(`
-        INSERT INTO artists (id, name, genre, subgenre, url)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO artists (id, name, genre, subgenre, url, image_url)
+        VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT (id) DO UPDATE SET
           name = EXCLUDED.name,
           genre = EXCLUDED.genre,
           subgenre = EXCLUDED.subgenre,
+          image_url = EXCLUDED.image_url,
           updated_at = NOW()
       `, [
         artist.id,
         artist.name,
         artist.classifications?.map(c => c.genre?.name || null) || [],
         artist.classifications?.map(c => c.subGenre?.name || null) || [],
-        artist.url
+        artist.url,
+        artist.images?.reduce((best, img) => {
+          if(img.ratio === '16_9'){
+              if(!best || img.width > best.width) return img
+          }
+          return best
+        }, null)?.url || null
       ]);
 
       // Link artist to event
@@ -168,5 +176,8 @@ async function processEvent(eventData){
 }
 
 // Run sync every 6 hours
-setInterval(syncTicketmasterEvents, 1000 * 60 * 60 * 6);
+cron.schedule('0 */6 * * *', () => {
+    syncTicketmasterEvents();
+    console.log('Sync job triggered every 6 hours');
+  });
 syncTicketmasterEvents(); // Initial run
