@@ -37,8 +37,7 @@ const ArtistCard = ({ eventId, eventName, artists, eventDate, venueName, city, s
                             <span>{formatDate(eventDate)}</span>
                         </div>
                         <div className='EventCard-event-venue'>
-                            <span>{venueName || 'Venue TBD'}</span>
-                            <span>{`${city}, ${state}` || 'Venue TBD'}</span>
+                            <span>{venueName || 'Venue TBD'} | {`${city}, ${state}` || 'Venue TBD'}</span>
                         </div>
                     </div>
                     <a className='EventCard-event-url' href={eventUrl}>

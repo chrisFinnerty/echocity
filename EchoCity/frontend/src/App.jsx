@@ -8,6 +8,7 @@ import FormTemplate from './components/Forms/FormTemplate';
 import EventList from './components/EventList/EventList';
 import ArtistPage from './components/ArtistPage/ArtistPage';
 import Profile from './components/Profile/Profile';
+import FavoriteArtists from './components/FavoriteArtists/FavoriteArtists';
 import ProtectedRoute from './components/ProtectedRoute';
 import Context from './components/Context';
 
@@ -97,6 +98,7 @@ function App() {
             <Route path='/users/:username/edit' element={<FormTemplate fields={signupFields} title={`Profile Update`} buttonText='Save' type='profileEdit' onSubmitHandler={editUserProfile} />} />
             <Route path='/users/:id' element={<Profile />} />
             <Route path='/artists/:id' element={<ArtistPage getDomainName={getDomainName} />} />
+            <Route path='/users/:id/favoriteArtists' element={<FavoriteArtists getDomainName={getDomainName} />} />
           </Routes>
         </Context.Provider>
       </BrowserRouter>

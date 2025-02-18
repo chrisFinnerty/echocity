@@ -32,7 +32,7 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                                         <a href={`/artists/${artist.artistId}`}>
                                             {artist.artistName}
                                         </a>
-                                        {idx < artists.length -1 && ", "}
+                                        {idx < artists.length - 1 && ", "}
                                     </span>
                                 ))}
                         </div>
@@ -47,8 +47,7 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                             <span>{formatDate(eventDate)}</span>
                         </div>
                         <div className='EventCard-event-venue'>
-                            <span>{venueName || 'Venue TBD'}</span>
-                            <span>{`${city}, ${state}` || 'Venue TBD'}</span>
+                            <span>{venueName || 'Venue TBD'} | {`${city}, ${state}` || 'Venue TBD'}</span>
                         </div>
                     </div>
                     <a className='EventCard-event-url' href={eventUrl}>

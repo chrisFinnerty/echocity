@@ -18,6 +18,18 @@
     object-fit: contain;
 }
 
+.ArtistPage-favorite {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.ArtistPage-favorite button {
+    padding-left: .8rem;
+}
+
 .ArtistPage-name {
     flex: 2;
     display: flex;

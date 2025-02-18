@@ -13,6 +13,7 @@
     height: 150px;
     border-bottom: 1px solid #646cff;
     padding: 1rem;
+    padding-left: 0;
     margin-bottom: 1rem;
     transition: transform 0.15s;
     overflow: hidden;
@@ -33,6 +34,14 @@
     font-weight: 700;
 }
 
+.EventCard-img-container {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-right: 45px;
+}
+
 .EventCard-details {
     display: flex;
     flex-direction: column;
@@ -40,14 +49,6 @@
     align-items: flex-start;
     flex: 1;
     min-width: 0;
-}
-
-.EventCard-img-container {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    border-radius: 50%;
-    margin-right: 30px;
 }
 
 .EventCard-event-image {
@@ -67,11 +68,6 @@
 
 .EventCard-event-card:hover {
     transform: translateY(-2px);
-}
-
-.EventCard-event-venue span {
-    margin-left: 5px;
-    margin-right: 5px;
 }
 
 .EventCard-event-url {

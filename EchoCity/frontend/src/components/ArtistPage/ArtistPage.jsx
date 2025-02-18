@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import Context from '../Context';
 import ArtistCard from './ArtistCard';
 import TicketMasterAPI from '../../api/ticketmasterAPI';
-import { formatDateHeaders } from '../../../helpers/formatDate';
+import FavoritesAPI from '../../api/FavoritesAPI';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import './ArtistPage.css';
 
 const ArtistPage = ({ getDomainName }) => {
+    const { currentUser } = useContext(Context)
     const [artist, setArtist] = useState(null);
     const [artistEvents, setArtistEvents] = useState([]);
+    const [favoriteArtist, setFavoriteArtist] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -39,10 +43,22 @@ const ArtistPage = ({ getDomainName }) => {
             } finally {
                 setIsLoading(false);
             }
+        };
+
+        const getFavoriteArtist = async () => {
+            try{
+                const favoriteArtist = await FavoritesAPI.getFavoriteArtist(currentUser.id, id);
+                setFavoriteArtist(favoriteArtist);
+            } catch(err){
+                console.error("Error fetching favorite artist status:", err);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         getArtist();
         getArtistEvents();
+        getFavoriteArtist();
     }, [ id ]);
 
     const groupedEvents = artistEvents.reduce((groups, event) => {
@@ -58,6 +74,16 @@ const ArtistPage = ({ getDomainName }) => {
         (a, b) => new Date(a) - new Date(b)
     );
 
+    const toggleArtistFavorite = async () => {
+        if(!favoriteArtist){
+            await FavoritesAPI.addFavoriteArtist(currentUser.id, id);
+            setFavoriteArtist(true);
+        } else {
+            await FavoritesAPI.deleteFavoriteArtist(currentUser.id, id);
+            setFavoriteArtist(false);
+        }
+    };
+
     if(isLoading || !artist) return <div className='isLoading'>Loading events...</div>;
 
     if(error) return <div className='error'>Error: {error}</div>;
@@ -67,6 +93,12 @@ const ArtistPage = ({ getDomainName }) => {
             <div className='ArtistPage-header'>
                 <div className='ArtistPage-img-container'>
                     <img className='ArtistPage-artist-image' src={artist.imageUrl} alt={`${artist.name}'s Profile Picture`} />
+                    <div className='ArtistPage-favorite'>
+                        <span>Add to Favorites</span>
+                        <button onClick={toggleArtistFavorite} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                            {favoriteArtist ? <FaHeart color='red' /> : <FaRegHeart color='red' /> }
+                        </button>
+                    </div>
                 </div>
                 <div className='ArtistPage-name'>
                     <h2>{artist.name}</h2>
