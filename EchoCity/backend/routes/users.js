@@ -24,7 +24,7 @@ router.get('/:id', async function(req, res, next){
     }
 });
 
-// Implement middleware - ensureCorrectUser and ensureLoggedIn
+// PATCH /[username] => { updateUser }
 router.patch('/:id', ensureLoggedIn, ensureCorrectUser, async function(req, res, next){
     try{
         const validator = jsonschema.validate(req.body, userUpdateScema);

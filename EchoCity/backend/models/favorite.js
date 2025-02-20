@@ -4,7 +4,7 @@ import db from "../db.js";
 class Favorite{
     // adds a favorite artist to the favorite_artists datatable
     static async addFavoriteArtist(userId, artistId){
-
+        console.log(userId, artistId);
         const result = await db.query(
             `
             INSERT INTO favorite_artists (user_id, artist_id)
@@ -31,6 +31,27 @@ class Favorite{
 
         const favoriteArtist = result.rows[0];
         return favoriteArtist;
+    }
+
+    static async getAllFavoriteArtists(userId){
+
+        const result = await db.query(
+            `SELECT 
+                fa.user_id AS "userId",
+                fa.artist_id AS "artistId",
+                a.name AS "artistName",
+                a.genre,
+                a.subgenre,
+                a.url,
+                a.image_url AS "imageUrl"
+             FROM favorite_artists AS "fa"
+             JOIN artists AS "a" ON fa.artist_id = a.id
+             WHERE user_id = $1
+            `, [ userId ]
+        );
+
+        const favoriteArtists = result.rows;
+        return favoriteArtists;
     }
 
     static async deleteFavoriteArtist(userId, artistId){
