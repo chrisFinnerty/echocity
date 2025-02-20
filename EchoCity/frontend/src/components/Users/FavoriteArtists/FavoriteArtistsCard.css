@@ -1,0 +1,77 @@
+.FavoriteArtistsCard {
+    padding: 1.26rem;
+    padding-left: 0px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.FavoriteArtistsCard-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 3rem;
+    border-bottom: solid #646cff 2px;
+}
+
+.FavoriteArtistsCard-img-container {
+    height: 200px;
+    width: 300px;
+    object-fit: contain;
+}
+
+.FavoriteArtistsCard-favorite {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.FavoriteArtistsCard-favorite button {
+    display: inline-flex;
+    vertical-align: middle;
+    padding-left: .8rem;
+}
+
+.FavoriteArtistsCard-name {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.FavoriteArtistsCard h2 {
+    align-self: center;
+    margin: auto 0;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.FavoriteArtistsCard a:hover{
+    color: grey;
+}
+
+.FavoriteArtistsCard-artist-image {
+    border: 2px solid #646cff;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 4 / 3;
+}
+
+.FavoriteArtistsCard-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    flex: 1;
+    min-width: 0;
+}
+/* 
+.FavoriteArtistsCard-events-container {
+    display: block;
+    gap: 2rem;
+    margin-top: 1rem;
+} */

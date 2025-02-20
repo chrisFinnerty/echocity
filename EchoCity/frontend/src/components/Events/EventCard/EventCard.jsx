@@ -1,7 +1,9 @@
-import {formatDate} from "../../../helpers/formatDate";
+import { formatDate } from '../../../../helpers/formatDate';
+import { Link } from 'react-router-dom';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import './EventCard.css';
 
-const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, state, eventUrl, imageUrl, getDomainName }) => {
+const EventCard = ({ eventId, eventName, artists, favoriteArtists, toggleFavoriteArtist, eventDate, venueName, city, state, eventUrl, imageUrl, getDomainName }) => {
     let ticketSource = getDomainName(eventUrl);
     
     if(ticketSource === 'Concerts'){
@@ -25,14 +27,16 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                         )}
                     </div>
                     <div className="EventCard-details">
-                        <div className="EventCard-event-name">{eventName}</div>
+                        <div className="EventCard-event-name"><Link to={`/events/${eventId}`}>{eventName}</Link></div>
                         <div className='EventCard-artists'>
-                                {artists?.map((artist, idx) => (
+                                {artists?.map(artist => (
                                     <span key={artist.artistName}>
-                                        <a href={`/artists/${artist.artistId}`}>
+                                        <Link to={`/artists/${artist.artistId}`}>
                                             {artist.artistName}
-                                        </a>
-                                        {idx < artists.length - 1 && ", "}
+                                        </Link>
+                                        <button onClick={() => toggleFavoriteArtist(artist.artistId)}>
+                                            {favoriteArtists.some(a => a.artistId === artist.artistId) ? <FaHeart color='red' /> : <FaRegHeart color='red' /> }
+                                        </button>
                                     </span>
                                 ))}
                         </div>

@@ -1,5 +1,5 @@
-import {formatDate} from "../../../helpers/formatDate";
-import '../EventCard/EventCard.css';
+import { formatDate } from "../../../../helpers/formatDate";
+import '../../Events/EventCard/EventCard.css';
 
 const ArtistCard = ({ eventId, eventName, artists, eventDate, venueName, city, state, eventUrl, getDomainName }) => {
     let ticketSource = getDomainName(eventUrl);

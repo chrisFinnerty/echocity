@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import Context from '../Context';
-import ArtistCard from './ArtistCard';
-import TicketMasterAPI from '../../api/ticketmasterAPI';
-import FavoritesAPI from '../../api/FavoritesAPI';
+import Context from '../../Context';
+import ArtistCard from '../ArtistCard/ArtistCard';
+import TicketMasterAPI from '../../../api/ticketmasterAPI';
+import FavoritesAPI from '../../../api/FavoritesAPI';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import './ArtistPage.css';
 
@@ -74,7 +74,7 @@ const ArtistPage = ({ getDomainName }) => {
         (a, b) => new Date(a) - new Date(b)
     );
 
-    const toggleArtistFavorite = async () => {
+    const toggleFavoriteArtist = async () => {
         if(!favoriteArtist){
             await FavoritesAPI.addFavoriteArtist(currentUser.id, id);
             setFavoriteArtist(true);
@@ -94,8 +94,8 @@ const ArtistPage = ({ getDomainName }) => {
                 <div className='ArtistPage-img-container'>
                     <img className='ArtistPage-artist-image' src={artist.imageUrl} alt={`${artist.name}'s Profile Picture`} />
                     <div className='ArtistPage-favorite'>
-                        <span>Add to Favorites</span>
-                        <button onClick={toggleArtistFavorite} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                        {favoriteArtist ? <span>Favorited!</span> : <span>Add to Favorites</span>}
+                        <button onClick={toggleFavoriteArtist} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                             {favoriteArtist ? <FaHeart color='red' /> : <FaRegHeart color='red' /> }
                         </button>
                     </div>

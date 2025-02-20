@@ -5,15 +5,16 @@ import { BrowserRouter, Routes, Route, data } from 'react-router-dom'
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import FormTemplate from './components/Forms/FormTemplate';
-import EventList from './components/EventList/EventList';
-import ArtistPage from './components/ArtistPage/ArtistPage';
-import Profile from './components/Profile/Profile';
-import FavoriteArtists from './components/FavoriteArtists/FavoriteArtists';
+import EventList from './components/Events/EventList/EventList';
+import EventPage from './components/Events/EventPage/EventPage';
+import ArtistPage from './components/Artists/ArtistPage/ArtistPage';
+import Profile from './components/Users/Profile/Profile';
+import FavoriteArtists from './components/Users/FavoriteArtists/FavoriteArtists';
+
 import ProtectedRoute from './components/ProtectedRoute';
 import Context from './components/Context';
 
 // APIs
-import TicketMasterAPI from './api/ticketmasterAPI';
 import BaseAPI from './api/BaseAPI';
 import UsersAPI from './api/UsersAPI';
 
@@ -88,17 +89,66 @@ function App() {
       <Context.Provider value={{ currentUser, setCurrentUser }}>
         <NavBar logout={logout} />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route 
+              path='/' 
+              element={<Home />} 
+            />
             <Route 
               path='/events' 
               element={<ProtectedRoute element={<EventList getDomainName={getDomainName} />} />}
             />
-            <Route path='/signup' element={<FormTemplate fields={signupFields} title='Sign Up to Echocity!' buttonText='Sign up' type='signup' onSubmitHandler={signupUser} />} />
-            <Route path='/login' element={<FormTemplate fields={loginFields} title='Login to Echocity!' buttonText='Log In' type='login' onSubmitHandler={loginUser} />} />
-            <Route path='/users/:username/edit' element={<FormTemplate fields={signupFields} title={`Profile Update`} buttonText='Save' type='profileEdit' onSubmitHandler={editUserProfile} />} />
-            <Route path='/users/:id' element={<Profile />} />
-            <Route path='/artists/:id' element={<ArtistPage getDomainName={getDomainName} />} />
-            <Route path='/users/:id/favoriteArtists' element={<FavoriteArtists getDomainName={getDomainName} />} />
+            <Route 
+              path='/events/:id' 
+              element={<ProtectedRoute element={<EventPage getDomainName={getDomainName} />} />}
+            />
+            <Route 
+              path='/signup' 
+              element={
+                <FormTemplate 
+                  fields={signupFields} 
+                  title='Sign Up to Echocity!' 
+                  buttonText='Sign up' 
+                  type='signup' 
+                  onSubmitHandler={signupUser} 
+                />}
+              />
+            <Route 
+              path='/login' 
+              element={
+                  <FormTemplate 
+                    fields={loginFields} 
+                    title='Login to Echocity!' 
+                    buttonText='Log In' 
+                    type='login' 
+                    onSubmitHandler={loginUser} 
+                />} 
+              />
+            <Route 
+              path='/profile/edit' 
+                element={
+                  <ProtectedRoute 
+                    element={
+                      <FormTemplate 
+                        fields={signupFields} 
+                        title={`Profile Update`} 
+                        buttonText='Save' 
+                        type='profileEdit' 
+                        onSubmitHandler={editUserProfile} 
+                      />}
+                  />}
+              />
+            <Route 
+              path='/users/:id' 
+              element={<Profile />} 
+            />
+            <Route 
+              path='/artists/:id' 
+              element={<ArtistPage getDomainName={getDomainName} />} 
+            />
+            <Route 
+              path='/my-artists' 
+              element={<FavoriteArtists getDomainName={getDomainName} />} 
+            />
           </Routes>
         </Context.Provider>
       </BrowserRouter>

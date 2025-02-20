@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-import Context from '../Context';
+import Context from '../../Context';
 import { useParams } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import UsersAPI from '../../api/UsersAPI';
-import { formatDateMY } from '../../../helpers/formatDate';
+import UsersAPI from '../../../api/UsersAPI';
+import { formatDateMY } from '../../../../helpers/formatDate';
 import './Profile.css';
 
 const Profile = () => {
@@ -50,7 +50,7 @@ const Profile = () => {
                 </div>
                     <div className='Profile-btn-container'>
                         {currentUser && 
-                            <button onClick={() => navigate(`/users/${id}/edit`)}>Edit</button>
+                            <button onClick={() => navigate(`/profile/edit`)}>Edit</button>
                         }
                     </div>
             </div>

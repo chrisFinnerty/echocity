@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import Context from '../Context';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Form, Button } from 'reactstrap';
 import './Home.css';
 

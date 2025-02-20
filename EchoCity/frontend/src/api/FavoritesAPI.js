@@ -15,7 +15,17 @@ class FavoritesAPI extends BaseAPI {
 
     static async getFavoriteArtist(userId, artistId){
         try{
-            const res = await this.request({ endpoint: `api/favorites/artists`, data: { userId, artistId } });
+            const res = await this.request({ endpoint: `api/favorites/artists/${artistId}`, data: { userId, artistId } });
+
+            return res.data;
+        } catch(err){
+            console.error("Failed to get favorite artist:", err);
+        }
+    }
+
+    static async getAllFavoriteArtists(userId){
+        try{
+            const res = await this.request({ endpoint: `api/favorites//${userId}/artists` });
 
             return res.data;
         } catch(err){

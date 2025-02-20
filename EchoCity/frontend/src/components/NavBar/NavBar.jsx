@@ -18,13 +18,13 @@ const NavBar = ({ logout }) => {
                         <NavLink tag={Link} to={`/events`}>Discover</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink tag={Link} to='/'>Favorite Artists</NavLink>
+                        <NavLink tag={Link} to={`/my-artists`}>My Artists</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink tag={Link} to='/'>Concerts</NavLink>
+                        <NavLink tag={Link} to='/'>My Concerts</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink tag={Link} to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink>
+                        <NavLink tag={Link} to={`/users/${currentUser.id}`}>My Profile</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink tag={Link} to='/' onClick={logout}>Logout</NavLink>

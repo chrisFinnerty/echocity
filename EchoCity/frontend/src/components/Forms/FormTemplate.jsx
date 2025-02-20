@@ -1,16 +1,18 @@
 import { useEffect, useState, useContext } from 'react';
 import Context from '../Context';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Label, Input, Button, Form } from 'reactstrap';
 
 const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
     const {currentUser} = useContext(Context);
+    const { id } = useParams();
     const navigate = useNavigate();
     const [formdata, setFormData] = useState({});
 
     useEffect(() => {
         if(currentUser) {
             setFormData(currentUser);
+            console.log(currentUser);
         } else {
             setFormData({});
         }
