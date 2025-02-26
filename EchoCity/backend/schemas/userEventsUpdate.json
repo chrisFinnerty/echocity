@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "title": "User Events Creation Schema",
+    "type": "object",
+    "default": {},
+    "required": [
+        "isInterested",
+        "isAttended"
+    ],
+    "properties": {
+        "isInterested": {
+            "title": "The isInterested Schema",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "isAttended": {
+            "title": "The isAttended Schema",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        }
+    },
+    "examples": [{
+        "isInterested": true,
+        "isAttended": true
+    }]
+}

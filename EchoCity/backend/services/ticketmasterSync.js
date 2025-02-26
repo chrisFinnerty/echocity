@@ -69,13 +69,6 @@ async function processEvent(eventData){
   try {
     await client.query('BEGIN');
 
-    // Note - implement this later when want to be more specific on start date/time?
-    // const rawDateTime = eventData.dates?.start?.dateTime;
-
-    // const eventDate = rawDateTime && !isNaN(new Date(rawDateTime).getTime())
-    //                 ? new Date(rawDateTime)
-    //                 : null;
-
     // 3. Extract core event data
     const event = {
       id: eventData.id,

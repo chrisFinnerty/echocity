@@ -1,10 +1,18 @@
 import express from 'express';
 const router = express.Router();
+import jsonschema from 'jsonschema';
+import favoriteArtistCreateSchema from '../schemas/favoriteArtistCreate.json' with {type : 'json'};
 import Favorite from '../models/favorite.js';
 
 // POST - add a favorite artist for favorite_artists
 router.post('/artists', async function(req, res, next){
     try{
+        const validator = jsonschema.validate(req.body, favoriteArtistCreateSchema);
+        if(!validator.valid){
+            const errs = validator.errors.map((e => e.stack));
+            throw new Error(errs);
+        };
+        
         const { userId, artistId } = req.body;
         console.log(userId, artistId);
         const favoriteArtist = await Favorite.addFavoriteArtist(userId, artistId);
@@ -31,9 +39,7 @@ router.get('/artists/:id', async function(req, res, next){
 router.get('/:userId/artists', async function(req, res, next){
     try{
         const { userId } = req.params;
-        console.log(userId);
         const favoriteArtists = await Favorite.getAllFavoriteArtists(userId);
-        console.log(favoriteArtists);
         return res.json({ data: favoriteArtists });
     } catch(err){
         console.error("Database error", err);

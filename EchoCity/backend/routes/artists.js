@@ -17,6 +17,24 @@ router.get('/:id', async function(req, res, next) {
     }
 
 });
+
+// GET artists based on filters
+router.get('/', async function(req, res, next) {
+    try{
+        const [ artistIds ] = req.query;
+        const artistIdArr = artistIds ? artistIds.split(',').map(Number) : [];
+
+        const artists = await Artist.getByFilters(artistIdArr);
+        if(!artists.length) return res.status(404).json({message: "Artist not found"});
+
+        return res.json({ data: artists });
+    } catch(err){
+        console.error("Error fetching artist", err);
+        return next();
+    }
+
+});
+
 // GET an artist's events 
 router.get('/:id/events', async function(req, res, next) {
     try{

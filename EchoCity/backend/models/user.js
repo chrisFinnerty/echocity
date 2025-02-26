@@ -95,7 +95,7 @@ class User {
 
     // Finds a user based on their username
     static async getUserById(id){
-        console.log("User.getUserById -> id from /users/id call:", id);
+
         const userRes = await db.query(
             `SELECT 
                 id,
@@ -112,7 +112,6 @@ class User {
         );
 
         const user = userRes.rows[0];
-        console.log("User.getUserById -> user response:", user);
 
         if(!user) throw new Error(`No user with id: ${id}`);
 

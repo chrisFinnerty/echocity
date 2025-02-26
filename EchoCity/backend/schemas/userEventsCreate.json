@@ -1,0 +1,53 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "title": "User Events Creation Schema",
+    "type": "object",
+    "default": {},
+    "required": [
+        "userId",
+        "eventId",
+        "isInterested",
+        "isAttended"
+    ],
+    "properties": {
+        "userId": {
+            "title": "The userId Schema",
+            "type": "integer",
+            "default": 0,
+            "examples": [
+                1
+            ]
+        },
+        "eventId": {
+            "title": "The eventId Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "K7250Blez"
+            ]
+        },
+        "isInterested": {
+            "title": "The isInterested Schema",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "isAttended": {
+            "title": "The isAttended Schema",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        }
+    },
+    "examples": [{
+        "userId": 1,
+        "eventId": "K7250Blez",
+        "isInterested": true,
+        "isAttended": true
+    }]
+}

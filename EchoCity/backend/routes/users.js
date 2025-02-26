@@ -4,8 +4,6 @@ import { ensureCorrectUser, ensureLoggedIn } from '../middleware/auth.js';
 import userUpdateScema from '../schemas/userUpdate.json' with {type: "json"};
 import User from '../models/user.js';
 
-// INPUT SCHEMAS HERE
-
 const router = express.Router();
 
 // GET /[username] => { user }

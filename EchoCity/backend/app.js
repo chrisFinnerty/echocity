@@ -6,6 +6,7 @@ import artistsRoutes from './routes/artists.js';
 import authRoutes from './routes/auth.js';
 import usersRoutes from './routes/users.js';
 import favoritesRoutes from './routes/favorites.js';
+import userEvents from './routes/userEvents.js';
 import { authenticateJWT } from './middleware/auth.js';
 import cookieParser from 'cookie-parser';
 
@@ -33,5 +34,6 @@ app.use('/api/artists', artistsRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/favorites', favoritesRoutes);
+app.use('/api/userEvents', userEvents);
 
 export default app;
