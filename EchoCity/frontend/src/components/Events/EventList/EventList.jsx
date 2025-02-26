@@ -5,6 +5,7 @@ import TicketMasterAPI from '../../../api/ticketmasterAPI';
 import FavoritesAPI from '../../../api/FavoritesAPI';
 import UserEventsAPI from '../../../api/UserEventsAPI';
 import EventCard from '../EventCard/EventCard';
+import Loader from '../../Loader/Loader';
 import { formatDateHeaders } from '../../../../helpers/formatDate';
 import './EventList.css';
 
@@ -30,6 +31,7 @@ const EventList = ({ getDomainName }) => {
     async function getData() {
         try{
             setIsLoading(true);
+
             const [ eventsData, favoriteArtists, userEvents ] = await Promise.all([
               TicketMasterAPI.getEvents({
                   city: cityFilter || null,
@@ -47,8 +49,10 @@ const EventList = ({ getDomainName }) => {
               return acc;
             }, []);
 
-            const uniqueCities = [...new Set(eventsData.map(event => event.city))];
-            const uniqueStates = [...new Set(eventsData.map(event => event.state))];
+            const uniqueCities = [...new Set(eventsData.map(event => event.city))]
+              .sort((a, b) => a.localeCompare(b));
+            const uniqueStates = [...new Set(eventsData.map(event => event.state))]
+              .sort((a, b) => a.localeCompare(b));
 
             setCityOptions(uniqueCities);
             setStateOptions(uniqueStates);
@@ -75,7 +79,7 @@ const EventList = ({ getDomainName }) => {
     }, [ currentUser, cityFilter, stateFilter ]);
     
 
-    if(isLoading) return <div className='isLoading'>Loading events...</div>;
+    if(isLoading) return <Loader />
     if(error) return <div className='error'>Error: {error}</div>;
 
     const indexOfLastEvent = currentPage * eventsPerPage;

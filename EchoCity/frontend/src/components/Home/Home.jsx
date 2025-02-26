@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Context from '../Context';
+import Loader from '../Loader/Loader.jsx';
 import TicketMasterAPI from '../../api/ticketmasterAPI.js';
 import FavoritesAPI from '../../api/FavoritesAPI.js';
 import './Home.css';
@@ -14,13 +15,11 @@ const Home = () => {
     const navigate = useNavigate();
 
     document.title = "Echocity | Home";
-
     useEffect(() => {
         const getData = async () => {
             if(!currentUser) return navigate('/');
 
             try{
-
                 setIsLoading(true);
                 setError(null);
 
@@ -74,7 +73,7 @@ const Home = () => {
 
     console.log(favoriteArtistsWithEvents);
 
-    if(isLoading) return <div className='isLoading'>Loading events...</div>;
+    if(isLoading) return <Loader />;
 
     if(error) return <div className='error'>Error: {error}</div>;
     

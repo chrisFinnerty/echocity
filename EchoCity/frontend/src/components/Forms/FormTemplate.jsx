@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import Context from '../Context';
 import { useNavigate } from 'react-router-dom';
 import { Label, Input, Button, Form } from 'reactstrap';
+import usStates from '../../../helpers/usStates';
 import './FormTemplate.css';
 
 const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
@@ -60,27 +61,32 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
                     {fields.map((field, idx) => (
                         <div className='FormTemplate-field' key={idx}>
                             <Label htmlFor={field.name}>{field.label}</Label>
-                            {currentUser && (type === 'signup' || type === 'login') ?  
-                                <Input 
+                            {field.name === 'state' ? (
+                                <select
                                     name={field.name}
                                     id={field.name}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
                                     required
-                                    disabled={field.disabled}
                                     onChange={handleChange}
-                                    value=""
-                                />
-                            : (
+                                    value={formdata[field.name] || ""}
+                                >
+                                    <option value="">Select a state</option>
+                                    {usStates.map(s => (
+                                        <option key={s.name} value={s.abbreviation}>
+                                            {s.abbreviation}
+                                        </option>
+                                    ))}
+                                </select>
+                            ) : (
                                 <Input 
                                     name={field.name}
                                     id={field.name}
                                     type={field.type}
                                     placeholder={field.placeholder}
+                                    required={field.required}
                                     disabled={field.disabled}
                                     onChange={handleChange}
                                     value={formdata[field.name] || ""}
-                            />
+                                />
                             )}
                         </div>
                     ))}
@@ -88,7 +94,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
                 </div>
             </Form>
         </div>
-    )
+    );
 }
 
 export default FormTemplate;

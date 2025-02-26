@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Context from '../../Context';
 import EventCard from '../../Events/EventCard/EventCard';
+import Loader from '../../Loader/Loader';
 import TicketMasterAPI from '../../../api/ticketmasterAPI';
 import FavoritesAPI from '../../../api/FavoritesAPI';
 import UserEventsAPI from '../../../api/UserEventsAPI';
@@ -133,7 +134,7 @@ const ArtistPage = ({ getDomainName }) => {
       };
     
 
-    if(isLoading || !artist) return <div className='isLoading'>Loading events...</div>;
+    if(isLoading || !artist) return <Loader />;
 
     if(error) return <div className='error'>Error: {error}</div>;
 

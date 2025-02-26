@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
-// COMPONENTS
 import NavBar from './components/NavBar/NavBar';
 import AnimatedRoutes from './AnimatedRoutes';
-
 import Context from './components/Context';
-
-// APIs
 import BaseAPI from './api/BaseAPI';
 import UsersAPI from './api/UsersAPI';
-
 import './App.css'
 
 function App() {
@@ -20,10 +13,14 @@ function App() {
 
   useEffect(() => {
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setTheme(darkMediaQuery.matches ? 'dark' : 'light');
+    const initialTheme = darkMediaQuery.matches ? 'dark' : 'light';
+    setTheme(initialTheme);
+    document.body.classList.toggle('dark', initialTheme === 'dark');
 
     const systemThemeChange = e => {
-      setTheme(e.matches ? 'dark' : 'light');
+      const newTheme = e.matches ? 'dark' : 'light';
+      setTheme(newTheme);
+      document.body.classList.toggle('dark', newTheme === 'dark');
     };
     darkMediaQuery.addEventListener('change', systemThemeChange);
 
@@ -31,7 +28,11 @@ function App() {
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme((prev) => {
+      const newTheme = prev === 'dark' ? 'light' : 'dark';
+      document.body.classList.toggle('dark', newTheme === 'dark');
+      return newTheme;
+    });
   };
 
   const onAuthSuccess = (user, token) => {
@@ -87,16 +88,13 @@ function App() {
     setCurrentUser(null);
   };
 
-  if(isLoading){
-    return <div>Loading...</div>
-  };
-
   return (
     <div className={`App ${theme}`} data-testid="app-container">
       <Context.Provider value={{ currentUser, setCurrentUser, theme, toggleTheme }}>
-        <NavBar logout={logout} />
+        <NavBar logout={logout} isLoading={isLoading}/>
           <AnimatedRoutes 
             currentUser={currentUser}
+            isLoading={isLoading}
             signupUser={signupUser}
             loginUser={loginUser}
             editUserProfile={editUserProfile}

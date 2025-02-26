@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { loginFields, signupFields } from './components/Forms/fields';
 import getDomainName from '../helpers/getDomainName';
 
-const AnimatedRoutes = ({ currentUser, signupUser, loginUser, editUserProfile} ) => {
+const AnimatedRoutes = ({ currentUser, isLoading, signupUser, loginUser, editUserProfile} ) => {
   const location = useLocation();
 
   return (

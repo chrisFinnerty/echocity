@@ -5,9 +5,12 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { FaToggleOn, FaToggleOff, FaMoon, FaSun }  from 'react-icons/fa6';
 import Logo from './Logo';
 import './NavBar.css';
+import Loader from '../Loader/Loader';
 
-const NavBar = ({ logout }) => {
+const NavBar = ({ logout, isLoading }) => {
     const {currentUser, theme, toggleTheme } = useContext(Context);
+
+    if(isLoading) return <Loader />;
     
     return (
         <>
@@ -19,11 +22,11 @@ const NavBar = ({ logout }) => {
                     <button onClick={toggleTheme} className='Navbar-theme-button'>
                         {theme === 'dark' ? (
                                 <>
-                                    <FaMoon style={{fill: 'black', backgroundColor: 'yellow' }} /> <FaToggleOff />
+                                    <FaMoon className="FaMoon" /> <FaToggleOff className='FaDisplayToggle'/>
                                 </> 
                                 ) : ( 
                                 <>
-                                    <FaSun /> <FaToggleOn /> 
+                                    <FaSun className='FaSun'/> <FaToggleOn className='FaDisplayToggle'/> 
                                 </>
                             )}
                     </button>
@@ -53,11 +56,11 @@ const NavBar = ({ logout }) => {
                         <button onClick={toggleTheme} className='Navbar-theme-button'>
                             {theme === 'dark' ? (
                                     <>
-                                        <FaMoon style={{fill: 'black', backgroundColor: 'yellow' }} /> <FaToggleOff />
+                                        <FaMoon className="FaMoon" /> <FaToggleOff className='FaDisplayToggle'/>
                                     </> 
                                     ) : ( 
                                     <>
-                                        <FaSun /> <FaToggleOn /> 
+                                        <FaSun className='FaSun'/> <FaToggleOn className='FaDisplayToggle'/> 
                                     </>
                                 )}
                         </button>

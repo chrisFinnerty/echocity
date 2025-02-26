@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Form, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
+import Loader from '../Loader/Loader';
 import { FaArrowRight } from "react-icons/fa6";
 import './WelcomePage.css';
 

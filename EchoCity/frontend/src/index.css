@@ -13,12 +13,14 @@
   --background-color: #ffffff;
   --text-color: #213547;
   --button-bg: #f9f9f9;
+  --loader-color: #000;
 }
 
-.App.dark {
+body.dark {
   --background-color: #000000;
   --text-color: rgba(255, 255, 255, 0.87);
   --button-bg: #1a1a1a;
+  --loader-color: #fff;
 }
 
 .App {
@@ -39,7 +41,7 @@ a {
 body {
   margin: 0;
   padding-top: 60px;
-  background-color: #000000;
+  background-color: var(--background-color);
 }
 
 h1 {
