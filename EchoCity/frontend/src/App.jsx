@@ -92,18 +92,16 @@ function App() {
   };
 
   return (
-    <div className={`App ${theme}`}>
-      <BrowserRouter>
-        <Context.Provider value={{ currentUser, setCurrentUser, theme, toggleTheme }}>
-          <NavBar logout={logout} />
-            <AnimatedRoutes 
-              currentUser={currentUser}
-              signupUser={signupUser}
-              loginUser={loginUser}
-              editUserProfile={editUserProfile}
-            />
-          </Context.Provider>
-      </BrowserRouter>
+    <div className={`App ${theme}`} data-testid="app-container">
+      <Context.Provider value={{ currentUser, setCurrentUser, theme, toggleTheme }}>
+        <NavBar logout={logout} />
+          <AnimatedRoutes 
+            currentUser={currentUser}
+            signupUser={signupUser}
+            loginUser={loginUser}
+            editUserProfile={editUserProfile}
+          />
+        </Context.Provider>
     </div>
   )
 }

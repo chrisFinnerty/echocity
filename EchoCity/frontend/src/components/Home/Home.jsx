@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Context from '../Context';
-import TicketMasterAPI from '../../api/ticketmasterAPI';
-import FavoritesAPI from '../../api/FavoritesAPI';
+import TicketMasterAPI from '../../api/ticketmasterAPI.js';
+import FavoritesAPI from '../../api/FavoritesAPI.js';
 import './Home.css';
 
 const Home = () => {
@@ -79,7 +79,7 @@ const Home = () => {
     if(error) return <div className='error'>Error: {error}</div>;
     
     return (
-        <div className="Home">
+        <div className="Home" data-testid="home-container">
             <div className="Home-header">
                 <h1>Welcome, {currentUser.username}!</h1>
             </div>

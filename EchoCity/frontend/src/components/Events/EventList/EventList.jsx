@@ -186,7 +186,7 @@ const EventList = ({ getDomainName }) => {
   };
 
     return (
-        <div className='EventList'>
+        <div className='EventList' data-testid="events-container">
           <h2>Upcoming Concerts</h2>
           <div className='filters'>
               <input

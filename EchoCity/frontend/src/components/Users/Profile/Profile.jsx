@@ -31,7 +31,7 @@ const Profile = () => {
         getUser();
     }, [ id ]);
 
-    document.title = `Echocity | My Profile`
+    document.title = `Echocity | My Profile`;
 
     if(isLoading) return <div>Loading profile...</div>
     if(error) return <div>Sorry, an error occurred: {error}</div>
