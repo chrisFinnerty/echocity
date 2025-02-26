@@ -1,0 +1,30 @@
+
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  width="48" 
+  height="48" 
+  viewBox="0 0 48 48"
+>
+  <circle 
+    cx="24" 
+    cy="24" 
+    r="22" 
+    stroke="white"
+    stroke-width="2"
+  />
+
+  <text
+    x="50%"
+    y="43%"
+    fill="#646cff"
+    font-size="47"
+    stroke="#646cff"
+    stroke-width="2"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="sans-serif"
+    transform="rotate(-20, 24, 24)"
+  >
+    e
+  </text>
+</svg>

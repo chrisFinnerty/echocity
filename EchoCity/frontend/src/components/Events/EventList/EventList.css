@@ -7,8 +7,50 @@
 .EventList-events-container {
     display: block;
     gap: 2rem;
-    margin-top: 2rem;
+    /* margin-top: 1rem; */
 }
+
+.filters {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filters-search-input{
+    width: 100%
+  }
+  
+  .filters input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .filters select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .pagination-controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto 0;
+    margin-top: 4px;
+    font-size: 18px;
+  }
+
+  .pagination-controls a {
+    padding: 0 2rem;
+  }
+
+  .pagination-controls a:hover {
+    color: gray;
+  }
+  
 
 .loading, .error {
     text-align: center;

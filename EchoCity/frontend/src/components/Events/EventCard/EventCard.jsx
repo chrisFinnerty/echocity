@@ -1,9 +1,30 @@
 import { formatDate } from '../../../../helpers/formatDate';
 import { Link } from 'react-router-dom';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaToggleOff, FaToggleOn, FaCalendarCheck, FaRegCalendarTimes } from 'react-icons/fa';
 import './EventCard.css';
 
-const EventCard = ({ eventId, eventName, artists, favoriteArtists, toggleFavoriteArtist, eventDate, venueName, city, state, eventUrl, imageUrl, getDomainName }) => {
+const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, state, eventUrl, imageUrl, getDomainName, favoriteArtists, toggleFavoriteArtist, userEvents, toggleInterestedEvent, toggleAttendedEvent }) => {
+
+    const isArtistFavorite = (artistId) => {
+        return Array.isArray(favoriteArtists)
+            ? favoriteArtists.some(a => a.artistId === artistId)
+            : favoriteArtists && favoriteArtists.artistId === artistId;
+    };
+
+    const isInterested = Array.isArray(userEvents)
+        ? userEvents.some(e => e.eventId === eventId && e.isInterested)
+        : userEvents && userEvents.isInterested;
+        
+    const isAttended = Array.isArray(userEvents)
+        ? userEvents.some(e => e.eventId === eventId && e.isAttended)
+        : userEvents && userEvents.isAttended;
+
+    const disableActions = isAttended;
+
+
+    console.log(isInterested, isAttended);
+    console.log(userEvents);
+        
     let ticketSource = getDomainName(eventUrl);
     
     if(ticketSource === 'Concerts'){
@@ -17,17 +38,19 @@ const EventCard = ({ eventId, eventName, artists, favoriteArtists, toggleFavorit
             <div className='EventCard-card'>
                 <div className="EventCard-img-header-container">
                     <div className="EventCard-img-container">
-                        {imageUrl && (
-                            <img 
+                        <Link to={`/concerts/${eventId}`}>
+                            {imageUrl && (
+                                <img 
                                 src={imageUrl} 
                                 alt={`Event image for ${eventName}`}
                                 className="EventCard-event-image"
                                 loading="lazy" 
-                            />
-                        )}
+                                />
+                            )}
+                        </Link>
                     </div>
                     <div className="EventCard-details">
-                        <div className="EventCard-event-name"><Link to={`/events/${eventId}`}>{eventName}</Link></div>
+                        <div className="EventCard-event-name"><Link to={`/concerts/${eventId}`}>{eventName}</Link></div>
                         <div className='EventCard-artists'>
                                 {artists?.map(artist => (
                                     <span key={artist.artistName}>
@@ -35,7 +58,7 @@ const EventCard = ({ eventId, eventName, artists, favoriteArtists, toggleFavorit
                                             {artist.artistName}
                                         </Link>
                                         <button onClick={() => toggleFavoriteArtist(artist.artistId)}>
-                                            {favoriteArtists.some(a => a.artistId === artist.artistId) ? <FaHeart color='red' /> : <FaRegHeart color='red' /> }
+                                            {isArtistFavorite(artist.artistId) ? <FaHeart color='red' /> : <FaRegHeart color='red' /> }
                                         </button>
                                     </span>
                                 ))}
@@ -54,9 +77,21 @@ const EventCard = ({ eventId, eventName, artists, favoriteArtists, toggleFavorit
                             <span>{venueName || 'Venue TBD'} | {`${city}, ${state}` || 'Venue TBD'}</span>
                         </div>
                     </div>
-                    <a className='EventCard-event-url' href={eventUrl}>
-                        <button>{ticketSource}</button>
-                    </a>
+                    <div className='EventCard-event-buttons-container'>
+                        <div className='EventCard-userEvents-button'>
+                                <button onClick={() => toggleInterestedEvent(eventId)} disabled={disableActions}>
+                                    {isInterested ? <FaToggleOn color='yellow '/> : <FaToggleOff color='yellow '/>}<span>Interested</span> 
+                                </button>
+                                {new Date(eventDate).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) && 
+                                    <button onClick={() => toggleAttendedEvent(eventId)} disabled={disableActions}>
+                                        {isAttended ? <FaCalendarCheck color='green' /> : <FaRegCalendarTimes color='red'/>} <span>Attended</span>
+                                    </button>     
+                                }
+                        </div>
+                        <a className='EventCard-event-url' href={eventUrl}>
+                            <button>{ticketSource}</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

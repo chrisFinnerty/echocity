@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Context from '../../Context';
-import ArtistCard from '../ArtistCard/ArtistCard';
+import EventCard from '../../Events/EventCard/EventCard';
 import TicketMasterAPI from '../../../api/ticketmasterAPI';
 import FavoritesAPI from '../../../api/FavoritesAPI';
+import UserEventsAPI from '../../../api/UserEventsAPI';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import './ArtistPage.css';
 
@@ -12,54 +13,40 @@ const ArtistPage = ({ getDomainName }) => {
     const [artist, setArtist] = useState(null);
     const [artistEvents, setArtistEvents] = useState([]);
     const [favoriteArtist, setFavoriteArtist] = useState(false);
+    const [userEvents, setUserEvents] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
-        const getArtist = async () => {
+        const getData = async () => {
             try{
-                const artistData = await TicketMasterAPI.getArtist(id);
-
+                setIsLoading(true);
+                const [artistData, artistEventsData, favoriteArtistData, userEventsData] = await Promise.all([
+                    TicketMasterAPI.getArtist(id),
+                    TicketMasterAPI.getEventsByArtistId(id),
+                    FavoritesAPI.getFavoriteArtist(currentUser.id, id),
+                    UserEventsAPI.getAllUserEvents(currentUser.id)
+                ]);
+    
                 setArtist(artistData);
-                setError(null);
+                setArtistEvents(artistEventsData);
+                setFavoriteArtist(favoriteArtistData);
+                setUserEvents(userEventsData);
             } catch(err){
-                setError(err.message);
-                setArtist(null);
-                console.error("Error fetching artist details:", err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        const getArtistEvents = async () => {
-            try{
-                const artistEvents = await TicketMasterAPI.getEventsByArtistId(id);
-
-                setArtistEvents(artistEvents);
-                setError(null);
-            } catch(err){
-                console.error("Error fetching artist events:", err)
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        const getFavoriteArtist = async () => {
-            try{
-                const favoriteArtist = await FavoritesAPI.getFavoriteArtist(currentUser.id, id);
-                setFavoriteArtist(favoriteArtist);
-            } catch(err){
-                console.error("Error fetching favorite artist status:", err);
-            } finally {
+                setError(err);
+                console.error("Error fetching data:", err);
+            } finally{
                 setIsLoading(false);
             }
         }
+        
+        getData();
+    }, [ id, currentUser.id ]);
 
-        getArtist();
-        getArtistEvents();
-        getFavoriteArtist();
-    }, [ id ]);
+    if(artist){
+      document.title = artist.name || 'Echocity';
+    };
 
     const groupedEvents = artistEvents.reduce((groups, event) => {
         const date = event.eventDate;
@@ -83,6 +70,68 @@ const ArtistPage = ({ getDomainName }) => {
             setFavoriteArtist(false);
         }
     };
+
+    const toggleInterestedEvent = async (eventId) => {
+        try {
+          const existingRecord = userEvents.find(e => e.eventId === eventId);
+          console.log(existingRecord);
+    
+          if(existingRecord) {
+            const updatedRecord = await UserEventsAPI.updateUserEvent(
+              currentUser.id,
+              eventId,
+              !existingRecord.isInterested,
+              existingRecord.isAttended
+            );
+    
+            setUserEvents(prev =>
+              prev.map(e => e.eventId === eventId ? updatedRecord : e)
+            );
+          } else {
+            const newRecord = await UserEventsAPI.createUserEvent(
+              currentUser.id,
+              eventId,
+              true,
+              false
+            );
+    
+            setUserEvents(prev => [...prev, newRecord]);
+          }
+        } catch (err) {
+          console.error("Toggle Interested failed:", err);
+        }
+      };
+      
+      const toggleAttendedEvent = async (eventId) => {
+        try {
+          const existingRecord = userEvents.find(e => e.eventId === eventId);
+    
+          if(existingRecord) {
+            const updatedRecord = await UserEventsAPI.updateUserEvent(
+              currentUser.id,
+              eventId,
+              existingRecord.isInterested,
+              !existingRecord.isAttended
+            );
+    
+            setUserEvents(prev =>
+              prev.map(e => e.eventId === eventId ? updatedRecord : e)
+            );
+          } else {
+            const newRecord = await UserEventsAPI.createUserEvent(
+              currentUser.id,
+              eventId,
+              false,
+              true
+            );
+    
+            setUserEvents(prev => [...prev, newRecord]);
+          }
+        } catch (err) {
+          console.error("Toggle Attended failed:", err);
+        }
+      };
+    
 
     if(isLoading || !artist) return <div className='isLoading'>Loading events...</div>;
 
@@ -114,7 +163,7 @@ const ArtistPage = ({ getDomainName }) => {
             {sortedDates.map(date => (
                 <div key={date} className='ArtistPage-date-group'>
                     {groupedEvents[date].map(event => (
-                        <ArtistCard
+                        <EventCard
                             key={event.eventId}
                             eventId={event.eventId}
                             eventName={event.eventName}
@@ -124,7 +173,12 @@ const ArtistPage = ({ getDomainName }) => {
                             city={event.city}
                             state={event.state}
                             eventUrl={event.url}
+                            favoriteArtists={favoriteArtist}
                             getDomainName={getDomainName}
+                            toggleFavoriteArtist={toggleFavoriteArtist}
+                            userEvents={userEvents}
+                            toggleInterestedEvent={toggleInterestedEvent}
+                            toggleAttendedEvent={toggleAttendedEvent}
                         />
                 ))}
             </div>

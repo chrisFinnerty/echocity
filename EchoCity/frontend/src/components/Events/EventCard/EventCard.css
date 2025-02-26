@@ -7,14 +7,17 @@
     width: 100%;
 }
 
+.EventCard a:hover{
+    color: gray;
+}
+
 .EventCard-card {
     display: block;
     width: 100%;
-    height: 150px;
+    height: 169px;
     border-bottom: 1px solid #646cff;
-    padding: 1rem;
     padding-left: 0;
-    margin-bottom: 1rem;
+    margin-bottom: .75rem;
     transition: transform 0.15s;
     overflow: hidden;
 }
@@ -35,17 +38,19 @@
 }
 
 .EventCard-img-container {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
     border-radius: 50%;
     margin-right: 45px;
+    margin-top: 10px; 
 }
 
 .EventCard-event-image {
     height: 100%;
     width: auto;
     aspect-ratio: 4 / 3;
+    border: solid #646cff 2px;
 }
 
 .EventCard-event-image:hover {
@@ -59,6 +64,7 @@
     align-items: flex-start;
     flex: 1;
     min-width: 0;
+    padding: 0 1rem;
 }
 
 .EventCard-event-name {
@@ -68,6 +74,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100%;
+    margin-bottom: 4px;
+}
+
+.EventCard-artists {
+    margin-bottom: 4px;
+    margin-left: 1px;
 }
 
 .EventCard-artists span {
@@ -87,6 +99,49 @@
     margin-left: 8px;
     margin-right: 8px;
     line-height: 1;
+}
+
+.EventCard-event-date {
+    margin-bottom: -3px;
+}
+
+.EventCard-event-venue {
+    margin-left: 2px;
+}
+
+.EventCard-event-buttons-container{
+    margin-bottom: 10px;
+}
+
+.EventCard-userEvents-button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+    width: 130px;
+    height: 2.5rem;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 0 0.5rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+.EventCard-userEvents-button button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.EventCard-userEvents-button button:hover{
+    border-color: yellow;
 }
 
 .EventCard-event-url {
@@ -116,4 +171,5 @@
     vertical-align: middle;
     margin-right: 8px;
     filter: brightness(0) invert(1);
+    margin-bottom: 7px;
 }

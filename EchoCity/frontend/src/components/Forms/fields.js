@@ -10,7 +10,7 @@ const signupFields = [
 
 const loginFields = [
     { name: 'email', type: 'email', label: 'Email', placeholder: 'Email', required: true },
-    { name: 'password', type: 'password', label: 'Password', placeholder: 'Password', required: true }
+    { name: 'password', type: 'password', label: 'Password', placeholder: 'Password', required: true}
   ]
 
 

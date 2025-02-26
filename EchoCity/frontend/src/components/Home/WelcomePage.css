@@ -1,0 +1,103 @@
+.WelcomePage {
+    min-height: 90vh;
+    padding-top: 30px;
+}
+
+.WelcomePage-intro-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    max-width: 1600px;
+    margin: 0 auto;
+    background-image: url("../../assets/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 15px;
+}
+
+.WelcomePage-intro{
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    padding: .5rem;
+}
+
+.WelcomePage-cta-signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.WelcomePage-cta-button {
+    margin: 0 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.WelcomePage-cta {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+  }
+  
+
+.WelcomePage-cta-login-container p {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.WelcomePage-cta-login-container {
+    margin-left: 10px;
+}
+
+.WelcomePage-cta-button a{
+    color: white;
+}
+
+.WelcomePage-login-header{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    margin-top: 175px;
+}
+
+.WelcomePage-features-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.WelcomePage-features-header{
+    color: #646cff;
+    font-weight: 700;
+    padding: 1rem;
+    text-align: center;
+}
+
+.WelcomePage-features-row{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+}
+
+.WelcomePage-features-concerts,
+.WelcomePage-features-artists,
+.WelcomePage-features-tracking {
+  flex: 1; 
+  padding: 1rem;
+  text-align: left;
+  margin: 0 10px;
+  border: 2px solid white;
+}
+
+.WelcomePage-features-row h3{
+    color: #646cff;
+    margin-bottom: 20px;
+}

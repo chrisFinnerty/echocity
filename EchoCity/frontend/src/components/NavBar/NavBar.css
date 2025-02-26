@@ -8,6 +8,10 @@
     padding-top: 15px;
 }
 
+.Navbar-theme-button {
+    background-color: black;
+}
+
 .nav-item {
     margin-left: 15px;
 }

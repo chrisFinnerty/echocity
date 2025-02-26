@@ -1,30 +1,38 @@
-import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, data } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 // COMPONENTS
-import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import FormTemplate from './components/Forms/FormTemplate';
-import EventList from './components/Events/EventList/EventList';
-import EventPage from './components/Events/EventPage/EventPage';
-import ArtistPage from './components/Artists/ArtistPage/ArtistPage';
-import Profile from './components/Users/Profile/Profile';
-import FavoriteArtists from './components/Users/FavoriteArtists/FavoriteArtists';
+import AnimatedRoutes from './AnimatedRoutes';
 
-import ProtectedRoute from './components/ProtectedRoute';
 import Context from './components/Context';
 
 // APIs
 import BaseAPI from './api/BaseAPI';
 import UsersAPI from './api/UsersAPI';
 
-import { loginFields, signupFields } from './components/Forms/fields';
-import getDomainName from '../helpers/getDomainName';
 import './App.css'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [theme, setTheme] = useState('light');
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setTheme(darkMediaQuery.matches ? 'dark' : 'light');
+
+    const systemThemeChange = e => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+    darkMediaQuery.addEventListener('change', systemThemeChange);
+
+    return () => darkMediaQuery.removeEventListener('change', systemThemeChange);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const onAuthSuccess = (user, token) => {
     BaseAPI.token = token;
@@ -81,76 +89,20 @@ function App() {
 
   if(isLoading){
     return <div>Loading...</div>
-  }
+  };
 
   return (
-    <div className='App'>
+    <div className={`App ${theme}`}>
       <BrowserRouter>
-      <Context.Provider value={{ currentUser, setCurrentUser }}>
-        <NavBar logout={logout} />
-          <Routes>
-            <Route 
-              path='/' 
-              element={<Home />} 
+        <Context.Provider value={{ currentUser, setCurrentUser, theme, toggleTheme }}>
+          <NavBar logout={logout} />
+            <AnimatedRoutes 
+              currentUser={currentUser}
+              signupUser={signupUser}
+              loginUser={loginUser}
+              editUserProfile={editUserProfile}
             />
-            <Route 
-              path='/events' 
-              element={<ProtectedRoute element={<EventList getDomainName={getDomainName} />} />}
-            />
-            <Route 
-              path='/events/:id' 
-              element={<ProtectedRoute element={<EventPage getDomainName={getDomainName} />} />}
-            />
-            <Route 
-              path='/signup' 
-              element={
-                <FormTemplate 
-                  fields={signupFields} 
-                  title='Sign Up to Echocity!' 
-                  buttonText='Sign up' 
-                  type='signup' 
-                  onSubmitHandler={signupUser} 
-                />}
-              />
-            <Route 
-              path='/login' 
-              element={
-                  <FormTemplate 
-                    fields={loginFields} 
-                    title='Login to Echocity!' 
-                    buttonText='Log In' 
-                    type='login' 
-                    onSubmitHandler={loginUser} 
-                />} 
-              />
-            <Route 
-              path='/profile/edit' 
-                element={
-                  <ProtectedRoute 
-                    element={
-                      <FormTemplate 
-                        fields={signupFields} 
-                        title={`Profile Update`} 
-                        buttonText='Save' 
-                        type='profileEdit' 
-                        onSubmitHandler={editUserProfile} 
-                      />}
-                  />}
-              />
-            <Route 
-              path='/users/:id' 
-              element={<Profile />} 
-            />
-            <Route 
-              path='/artists/:id' 
-              element={<ArtistPage getDomainName={getDomainName} />} 
-            />
-            <Route 
-              path='/my-artists' 
-              element={<FavoriteArtists getDomainName={getDomainName} />} 
-            />
-          </Routes>
-        </Context.Provider>
+          </Context.Provider>
       </BrowserRouter>
     </div>
   )

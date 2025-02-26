@@ -8,6 +8,7 @@ const FavoriteArtists = () => {
     const { currentUser } = useContext(Context);
     const [favroiteArtists, setFavoriteArtists] = useState([]);
 
+    document.title = "Echocity | My Artists"
     useEffect(() => {
         async function getAllFavoriteArtists() {
             try{

@@ -1,4 +1,139 @@
-.Home a {
-    color: white;
-    text-decoration: none;
+.Home {
+    max-width: 1600px;
+    padding: 0.75rem 2rem;
+    margin: 0 auto;
 }
+
+.Home-header {
+    margin-bottom: 20px;
+}
+
+.Home-favorites-concerts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 700px;
+}
+
+.Home-favorites-concerts-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.Home-favorites-concerts-header h3 {
+    margin-right: 5rem;
+}
+
+.Home-favorites-concerts-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+.Home-favorites-concerts-info p {
+    margin: 0;
+}
+
+.favorites-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.Home-favorites-concerts-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border: 2px white solid;
+    transition: transform 0,3s ease-in-out;
+}
+
+.Home-artist-img-container {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.Home-artist-img-container img{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+
+.Home-favorites-artist-concert{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    flex: 0 0 calc(100% / 4);
+}
+
+.Home-favorites-artist-concert h3{
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: left;
+}
+
+.Home ul {
+    padding-left: 0px;
+}
+
+.Home a:hover{
+    color: gray;
+}
+
+.Home a h3 {
+    color: white;
+}
+
+.favorites-slider {
+    width: 100%; 
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .Home-favorites-concerts-row {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .favorites-slider-nav {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .favorites-slider-nav button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  
+  .favorites-slider-nav button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .Home-concerts-list {
+    flex-grow: 1;
+    width: 100%;
+    padding-right: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .Home-concert-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #444;
+  }
+  

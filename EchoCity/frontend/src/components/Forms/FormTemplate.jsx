@@ -1,13 +1,21 @@
 import { useEffect, useState, useContext } from 'react';
 import Context from '../Context';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Label, Input, Button, Form } from 'reactstrap';
+import './FormTemplate.css';
 
 const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
     const {currentUser} = useContext(Context);
-    const { id } = useParams();
     const navigate = useNavigate();
     const [formdata, setFormData] = useState({});
+
+    if(type === 'signup'){
+        document.title = "Echocity | Sign Up"
+    } else if(type === 'login'){
+        document.title = "Echocity | Login"
+    } else if(type === 'profileEdit'){
+        document.title = `${currentUser.username} - Edit Profile`
+    }
 
     useEffect(() => {
         if(currentUser) {
@@ -29,6 +37,12 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
     const handleSubmit = e => {
         e.preventDefault();
         try{
+            const emptyFields = fields.filter(f => f.required && !formdata[f.name]);
+            if(emptyFields.length > 0){
+                alert("Pleae fill in all required fields.");
+                return
+            };
+
             onSubmitHandler(formdata);
             console.log(`${title} successful!`);
             setFormData({});
@@ -40,9 +54,9 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
 
     return (
         <div className='FormTemplate'>
-            <h1>{title}</h1>
             <Form className='FormTemplate-form' onSubmit={handleSubmit}>
                 <div className='FormTemplate-signup-container'>
+                    <h1>{title}</h1>
                     {fields.map((field, idx) => (
                         <div className='FormTemplate-field' key={idx}>
                             <Label htmlFor={field.name}>{field.label}</Label>
@@ -52,7 +66,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
                                     id={field.name}
                                     type={field.type}
                                     placeholder={field.placeholder}
-                                    required={field.required}
+                                    required
                                     disabled={field.disabled}
                                     onChange={handleChange}
                                     value=""
