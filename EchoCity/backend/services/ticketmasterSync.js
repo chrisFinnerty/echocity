@@ -1,24 +1,14 @@
 import fetch from 'node-fetch';
-import pkg from 'pg';
+import db from '../db.js';
 import cron from 'node-cron';
 import { config } from 'dotenv';
 
-const { Pool } = pkg;
 config();
 
 // Environment Variables
 const TM_API_KEY = process.env.TM_API_KEY;
 const TM_API_BASE_URL = process.env.TM_API_BASE_URL;
 
-const DB_CONFIG = {
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-};
-
-const pool = new Pool(DB_CONFIG);
 let isSyncing = false;
 
 async function syncTicketmasterEvents(){
@@ -46,7 +36,7 @@ async function syncTicketmasterEvents(){
     
         // 2. Process each event
         for (const event of events) {
-          await processEvent(event);
+          await processEvent(event, db);
         }
     
         if(currentPage === 0) {
@@ -63,9 +53,7 @@ async function syncTicketmasterEvents(){
   }
 }
 
-async function processEvent(eventData){
-  const client = await pool.connect();
-  
+async function processEvent(eventData, client){
   try {
     await client.query('BEGIN');
 
@@ -163,8 +151,6 @@ async function processEvent(eventData){
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;
-  } finally {
-    client.release();
   }
 }
 

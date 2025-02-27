@@ -5,7 +5,6 @@ import db from '../db.js';
 class Event {
 
     static async getEvents(filters){
-        try {
           const { city, state, genre, subgenre, searchTerm } = filters;
           
           const query = `
@@ -52,11 +51,6 @@ class Event {
           const events = result.rows;
 
           return events;
-          
-        } catch (err) {
-          console.error('Database query error:', err);
-          res.status(500).json({ error: 'Failed to fetch events' });
-        }
     };
 
     //   GET Single Event from Database
@@ -107,7 +101,7 @@ class Event {
 };
 
     static async getEventsByArtistId(id){
-        try {
+
             const query = `
               SELECT 
                 e.id as "eventId",
@@ -143,11 +137,6 @@ class Event {
             const events = result.rows;
   
             return events;
-            
-          } catch (err) {
-            console.error('Database query error:', err);
-            res.status(500).json({ error: 'Failed to fetch artist events' });
-          }
     };
 };
   

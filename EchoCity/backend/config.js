@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 // Use dev database, testing database, or via env var, production database
 function getDatabaseUri() {
     return (process.env.NODE_ENV === "test")
-        ? "echocity_test"
+        ? process.env.TEST_DATABASE_URL
         : process.env.DATABASE_URL || "echocity";
   }
 
