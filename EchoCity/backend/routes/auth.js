@@ -9,8 +9,8 @@ import { SECRET_KEY } from '../config.js';
 import User from '../models/user.js';
 
 // Schemas
-import userSignupSchema from '../schemas/userSignup.json' with {type: "json"};
-import userAuthSchema from '../schemas/userAuth.json' with {type: "json"};
+import userSignupSchema from '../schemas/userSignup.json' assert {type: "json"};
+import userAuthSchema from '../schemas/userAuth.json' assert {type: "json"};
 
 const router = express.Router();
 
