@@ -19,6 +19,7 @@ const MyConcerts = ({ getDomainName }) => {
 
     useEffect(() => {
         const getData = async() => {
+          if(!currentUser) return;
             try{
                 setIsLoading(true);
                 const [ userEventsData, favoriteArtists ] = await Promise.all([

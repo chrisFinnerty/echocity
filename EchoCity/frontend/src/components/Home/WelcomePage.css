@@ -21,6 +21,7 @@
     font-weight: 700;
     backdrop-filter: blur(10px);
     padding: .5rem;
+    color: white;
 }
 
 .WelcomePage-cta-signup-container{
@@ -43,13 +44,9 @@
   }
   
 
-.WelcomePage-cta-login-container p {
+.WelcomePage-cta-login-container {
     display: flex;
     align-items: center;
-    margin-left: 10px;
-}
-
-.WelcomePage-cta-login-container {
     margin-left: 10px;
 }
 
@@ -94,7 +91,7 @@
   padding: 1rem;
   text-align: left;
   margin: 0 10px;
-  border: 2px solid white;
+  border: 2px solid;
 }
 
 .WelcomePage-features-row h3{

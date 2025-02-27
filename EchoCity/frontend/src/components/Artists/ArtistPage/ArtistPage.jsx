@@ -21,6 +21,7 @@ const ArtistPage = ({ getDomainName }) => {
 
     useEffect(() => {
         const getData = async () => {
+          if(!currentUser) return;
             try{
                 setIsLoading(true);
                 const [artistData, artistEventsData, favoriteArtistData, userEventsData] = await Promise.all([
@@ -43,7 +44,7 @@ const ArtistPage = ({ getDomainName }) => {
         }
         
         getData();
-    }, [ id, currentUser.id ]);
+    }, [ id, currentUser ]);
 
     if(artist){
       document.title = artist.name || 'Echocity';

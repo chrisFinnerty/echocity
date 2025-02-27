@@ -29,6 +29,7 @@ const EventList = ({ getDomainName }) => {
     document.title = `Echocity | Discover`;
 
     async function getData() {
+        if(!currentUser && !isLoading) return;
         try{
             setIsLoading(true);
 
@@ -73,9 +74,12 @@ const EventList = ({ getDomainName }) => {
         }
     }
     useEffect(() => {
-      if(currentUser){
-        getData();
-      }
+      if(!currentUser){
+        return;
+      } else{
+          getData();
+        };
+
     }, [ currentUser, cityFilter, stateFilter ]);
     
 

@@ -15,9 +15,10 @@ const Home = () => {
     const navigate = useNavigate();
 
     document.title = "Echocity | Home";
+    
     useEffect(() => {
         const getData = async () => {
-            if(!currentUser) return navigate('/');
+            if(!currentUser) return;
 
             try{
                 setIsLoading(true);
@@ -53,7 +54,7 @@ const Home = () => {
         }
         
         getData();
-    }, [ currentUser.id ]);
+    }, [ currentUser ]);
 
     const itemsPerPage = 4;
     const totalPages = Math.ceil(favoriteArtistsWithEvents.length / itemsPerPage);
@@ -134,7 +135,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-               
         </div>
     );
 };

@@ -17,11 +17,11 @@ const WelcomePage = () => {
                         <Button className='WelcomePage-cta-button'>
                             <Link className='WelcomePage-cta' to='/signup'>Sign Up <FaArrowRight /></Link>
                         </Button>
-                        <Button className='WelcomePage-cta-button'>
-                            <Link className='WelcomePage-cta' to='/login'>Login <FaArrowRight /></Link>
-                        </Button>
                         <div className='WelcomePage-cta-login-container'>
-                            <p>Have an account already?</p>
+                            <span>Have an account already?</span>
+                            <Button className='WelcomePage-cta-button'>
+                                <Link className='WelcomePage-cta' to='/login'>Login <FaArrowRight /></Link>
+                            </Button>
                         </div>
                     </div>
                 </div>

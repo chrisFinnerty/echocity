@@ -12,6 +12,7 @@ const FavoriteArtists = () => {
     useEffect(() => {
         async function getAllFavoriteArtists() {
             try{
+                if(!currentUser) return;
                 const favoriteArtists = await FavoritesAPI.getAllFavoriteArtists(currentUser.id);
                 setFavoriteArtists(favoriteArtists);
             } catch(err){
