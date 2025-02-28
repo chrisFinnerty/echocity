@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import Context from '../Context';
 import { useNavigate } from 'react-router-dom';
 import { Label, Input, Button, Form } from 'reactstrap';
+import Loader from '../Loader/Loader';
 import usStates from '../../../helpers/usStates';
 import './FormTemplate.css';
 
@@ -53,6 +54,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubm
 
     return (
         <div className='FormTemplate'>
+            {isSubmitting && <Loader />}
             <Form className='FormTemplate-form' onSubmit={handleSubmit}>
                 <div className='FormTemplate-signup-container'>
                     <h1>{title}</h1>
