@@ -15,8 +15,8 @@ configDotenv();
 const app = express();
 
 const origin = process.env.NODE_ENV === 'production'
-            ? process.env.DATABASE_URL
-            : process.env.FRONTEND_URL || 'http://localhost:5173'
+            ? process.env.PRODUCTION_URL
+            : process.env.FRONTEND_URL || 'http://127.0.0.1:4173' // npm run preview port/FE url
 
 app.use(express.json());
 
@@ -24,8 +24,8 @@ app.use(cookieParser());
 
 app.use(cors({
     origin: origin,
-    credentials: true,
-}));
+    credentials: true
+  }));
 
 app.use(authenticateJWT);
 
