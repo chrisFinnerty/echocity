@@ -1,7 +1,7 @@
 import express from 'express';
 import jsonschema from 'jsonschema';
 import { ensureCorrectUser, ensureLoggedIn } from '../middleware/auth.js';
-import userUpdateScema from '../schemas/userUpdate.json' assert {type: "json"};
+import userUpdateScema from '../schemas/userUpdate.json' with {type: "json"};
 import User from '../models/user.js';
 
 const router = express.Router();

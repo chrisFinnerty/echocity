@@ -1,7 +1,7 @@
 import express from 'express';
 import jsonschema from 'jsonschema';
-import userEventsCreateSchema from '../schemas/userEventsCreate.json' assert {type: 'json'};
-import userEventsUpdateSchema from '../schemas/userEventsUpdate.json' assert {type: 'json'};
+import userEventsCreateSchema from '../schemas/userEventsCreate.json' with {type: 'json'};
+import userEventsUpdateSchema from '../schemas/userEventsUpdate.json' with {type: 'json'};
 import UserEvent from '../models/userEvent.js';
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import jsonschema from 'jsonschema';
-import favoriteArtistCreateSchema from '../schemas/favoriteArtistCreate.json' assert {type : 'json'};
+import favoriteArtistCreateSchema from '../schemas/favoriteArtistCreate.json' with {type : 'json'};
 import Favorite from '../models/favorite.js';
 
 // POST - add a favorite artist for favorite_artists
