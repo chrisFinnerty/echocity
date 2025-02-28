@@ -17,6 +17,7 @@ const app = express();
 const origin = process.env.NODE_ENV === 'production'
             ? process.env.PRODUCTION_URL
             : process.env.FRONTEND_URL || 'http://localhost:5173'
+console.log('CORS origin set to:', origin);
 
 app.use(express.json());
 
