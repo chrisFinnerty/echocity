@@ -29,16 +29,17 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
+    origin: (requestOrigin, callback) => {
+      console.log('Incoming request origin:', requestOrigin);
+      if (!requestOrigin) return callback(null, true);
+      if (allowedOrigins.includes(requestOrigin)) {
         return callback(null, true);
       } else {
-        return callback(new Error(`CORS policy does not allow access from origin ${origin}`));
+        return callback(new Error(`CORS policy does not allow access from origin ${requestOrigin}`));
       }
     },
     credentials: true
-  }));
+}));
 
 app.use(authenticateJWT);
 
