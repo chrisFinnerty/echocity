@@ -84,7 +84,7 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                                     </button>     
                                 }
                         </div>
-                        <a className='EventCard-event-url' href={eventUrl}>
+                        <a className='EventCard-event-url' href={eventUrl} target='_blank' rel='noopener noreferrer'>
                             <button>{ticketSource}</button>
                         </a>
                     </div>
