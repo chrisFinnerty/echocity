@@ -61,7 +61,7 @@ router.post('/login', async function(req, res, next) {
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'strict',
             maxAge: 10 * 24 * 60 * 60 * 1000, // cookie expires in 10 days
         });
 
