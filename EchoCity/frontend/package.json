@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "vite": "^6.0.5",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
