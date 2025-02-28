@@ -3,7 +3,7 @@ import React from 'react';
 const Logo = () => (
   <svg
     width="150" 
-    height="50" 
+    height="45" 
     viewBox="0 0 300 100" 
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -38,8 +38,9 @@ const Logo = () => (
       x="50%"
       y="55%"
       textAnchor="middle"
+      dominantBaseline="middle"
       fontFamily="Verdana, sans-serif"
-      fontSize="45"
+      fontSize="50"
       fill="url(#grad)"
       filter="url(#glow)"
     >

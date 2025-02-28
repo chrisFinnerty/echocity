@@ -42,8 +42,8 @@ function App() {
   };
 
   const signupUser = async (data) => {
-    setIsSubmitting(true);
     try{
+      setIsSubmitting(true);
       // UsersAPI.signup returns { user, token } objects
       const { user, token } = await UsersAPI.signup(data);
       onAuthSuccess(user, token);
@@ -55,8 +55,8 @@ function App() {
   }
 
   const loginUser = async (data) => {
-    setIsSubmitting(true);
     try{
+      setIsSubmitting(true);
       const { user, token } = await UsersAPI.login(data);
       onAuthSuccess(user, token);
     } catch(err){

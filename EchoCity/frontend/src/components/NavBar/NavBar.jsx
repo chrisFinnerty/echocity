@@ -16,7 +16,7 @@ const NavBar = ({ logout, isLoading }) => {
     if(isLoading) return <Loader />;
     
     return (
-        <Navbar fixed="top" className="NavBar" dark expand="md">
+        <Navbar fixed="top" className={` NavBar ${isOpen ? 'menu-open' : '' }`} dark expand="md">
           <NavbarBrand tag={Link} to="/" id="NavBar-echo-logo">
             <Logo />
           </NavbarBrand>
