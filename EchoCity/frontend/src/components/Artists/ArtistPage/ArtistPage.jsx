@@ -76,7 +76,6 @@ const ArtistPage = ({ getDomainName }) => {
     const toggleInterestedEvent = async (eventId) => {
         try {
           const existingRecord = userEvents.find(e => e.eventId === eventId);
-          console.log(existingRecord);
     
           if(existingRecord) {
             const updatedRecord = await UserEventsAPI.updateUserEvent(

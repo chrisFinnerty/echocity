@@ -72,8 +72,6 @@ const Home = () => {
         (currentPage + 1) * itemsPerPage
     );
 
-    console.log(favoriteArtistsWithEvents);
-
     if(isLoading) return <Loader />;
 
     if(error) return <div className='error'>Error: {error}</div>;

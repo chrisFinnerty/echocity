@@ -4,7 +4,6 @@ import db from "../db.js";
 class Favorite{
     // adds a favorite artist to the favorite_artists datatable
     static async addFavoriteArtist(userId, artistId){
-        console.log(userId, artistId);
         const result = await db.query(
             `
             INSERT INTO favorite_artists (user_id, artist_id)

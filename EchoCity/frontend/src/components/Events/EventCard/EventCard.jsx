@@ -20,10 +20,6 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
         : userEvents && userEvents.isAttended;
 
     const disableActions = isAttended;
-
-
-    console.log(isInterested, isAttended);
-    console.log(userEvents);
         
     let ticketSource = getDomainName(eventUrl);
     

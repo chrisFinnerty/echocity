@@ -17,7 +17,6 @@ const EventPage = ({ getDomainName }) => {
     const { id } = useParams();
 
     document.title = "Echocity | Concert Details";
-    console.log(userEvent);
 
     useEffect(() => {
         const getData = async () => {
@@ -69,7 +68,6 @@ const EventPage = ({ getDomainName }) => {
 
     const toggleInterestedEvent = async (eventId) => {
         try {
-            console.log("BEFORE INTERESTED TOGGLE", userEvent);
     
           if(userEvent) {
             const updatedRecord = await UserEventsAPI.updateUserEvent(
@@ -79,9 +77,7 @@ const EventPage = ({ getDomainName }) => {
               userEvent.isAttended
             );
 
-            
             setUserEvent(updatedRecord);
-            console.log("AFTER INTERESTED TOGGLE", updatedRecord);
           } else {
             const newRecord = await UserEventsAPI.createUserEvent(
               currentUser.id,

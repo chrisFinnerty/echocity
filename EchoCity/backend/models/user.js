@@ -63,7 +63,6 @@ class User {
         );
 
         const user = result.rows[0];
-        console.log("User.signup in backend:", user)
         return user;
     }
     // User.authenticate - authenticates a user with their email/password
@@ -86,12 +85,10 @@ class User {
         );
 
         const user = result.rows[0];
-        console.log("models/user.js USER:", user);
 
         if(user){
             // compare hashed pwd to a new hash from pwd
             const isValid = await bcrypt.compare(password, user.password);
-            console.log("isValid CHECK:", isValid);
             if(isValid){
                 delete user.password;
                 return user;
@@ -136,9 +133,6 @@ class User {
             lastName: "last_name",
             createdAt: "created_at",
         });
-
-        console.log("data before setCols ->", data);
-        console.log("setCols ->", setCols);
 
         const querySql = `UPDATE users
                           SET ${setCols}

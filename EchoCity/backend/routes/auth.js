@@ -21,7 +21,6 @@ const router = express.Router();
 
 router.post('/signup', async function(req, res, next){
     try{
-        console.log("SIGNUP req.body ->", req.body);
         const validator = jsonschema.validate(req.body, userSignupSchema);
         if(!validator.valid){
             const errs = validator.errors.map(e => e.stack);
@@ -66,7 +65,6 @@ router.post('/login', async function(req, res, next) {
             maxAge: 10 * 24 * 60 * 60 * 1000, // cookie expires in 10 days
         });
 
-        console.log("/auth/token route TOKEN:", token)
         return res.json({ data: { user, token } });
     } catch(err){
         console.error(err);

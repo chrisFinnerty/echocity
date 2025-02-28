@@ -14,8 +14,6 @@ class UserEvent {
     }
 
     static async updateUserEvent(userId, eventId, isInterested, isAttended){
-        console.log("BEFORE QUERY TO DB - isInterested", isInterested);
-        console.log("BEFORE QUERY TO DB - isAttended", isAttended);
 
         const result = await db.query(
             `UPDATE user_events
@@ -26,8 +24,6 @@ class UserEvent {
         );
 
         const updatedEvent = result.rows[0];
-        console.log("AFTER QUERY TO DB - isInterested", updatedEvent.isInterested);
-        console.log("AFTER QUERY TO DB - isAttended", updatedEvent.isAttended);
         return updatedEvent;
     }
 

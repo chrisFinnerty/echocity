@@ -5,8 +5,6 @@ class UserEventsAPI extends BaseAPI{
 
     static async createUserEvent(userId, eventId, isInterested, isAttended){
         try{
-            console.log(userId, eventId);
-            console.log(typeof userId, typeof eventId);
             const res = await this.request({ endpoint: `api/userEvents`, data: { userId, eventId, isInterested, isAttended }, method: 'post' });
             return res.data;
         } catch(err){

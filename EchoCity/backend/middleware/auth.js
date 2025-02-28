@@ -37,9 +37,7 @@ function ensureLoggedIn(req, res, next) {
 
 function ensureCorrectEmail(req, res, next){
     try{
-        console.log("ensureCorrectEmail -> res.locals.user:", res.locals.user);
         const user = res.locals.user;
-        console.log("ensureCorrectEmail -> user:", user);
         if(!(user && user.email === req.params.email)) {
             throw new Error("Access Denied.")
         }

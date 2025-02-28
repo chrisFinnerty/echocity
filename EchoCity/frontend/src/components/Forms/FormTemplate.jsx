@@ -21,7 +21,6 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
     useEffect(() => {
         if(currentUser) {
             setFormData(currentUser);
-            console.log(currentUser);
         } else {
             setFormData({});
         }
@@ -45,7 +44,6 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
             };
 
             onSubmitHandler(formdata);
-            console.log(`${title} successful!`);
             setFormData({});
             navigate('/');
         } catch(err){

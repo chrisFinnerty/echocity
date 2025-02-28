@@ -5,8 +5,6 @@ class FavoritesAPI extends BaseAPI {
         try{
             const res = await this.request({ endpoint: `api/favorites/artists`, data: { userId, artistId }, method: 'post' });
 
-            console.log(res.data);
-
             return res;
         } catch(err){
             console.error("Failed to add favorite artist:", err);
