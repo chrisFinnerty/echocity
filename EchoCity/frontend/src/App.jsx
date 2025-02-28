@@ -10,6 +10,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [theme, setTheme] = useState('light');
   const [isLoading, setIsLoading] = useState(true);
+  cosnt [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -41,21 +42,27 @@ function App() {
   };
 
   const signupUser = async (data) => {
+    setIsSubmitting(true);
     try{
       // UsersAPI.signup returns { user, token } objects
       const { user, token } = await UsersAPI.signup(data);
       onAuthSuccess(user, token);
     } catch(err){
       console.error("Error signing up:", err)
+    } finally{
+      setIsSubmitting(false);
     }
   }
 
   const loginUser = async (data) => {
+    setIsSubmitting(true);
     try{
       const { user, token } = await UsersAPI.login(data);
       onAuthSuccess(user, token);
     } catch(err){
       console.error("Login error:", err)
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -95,6 +102,7 @@ function App() {
           <AnimatedRoutes 
             currentUser={currentUser}
             isLoading={isLoading}
+            isSubmitting={isSubmitting}
             signupUser={signupUser}
             loginUser={loginUser}
             editUserProfile={editUserProfile}

@@ -5,7 +5,7 @@ import { Label, Input, Button, Form } from 'reactstrap';
 import usStates from '../../../helpers/usStates';
 import './FormTemplate.css';
 
-const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
+const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubmitting }) => {
     const {currentUser} = useContext(Context);
     const navigate = useNavigate();
     const [formdata, setFormData] = useState({});
@@ -34,7 +34,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
         }));
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         try{
             const emptyFields = fields.filter(f => f.required && !formdata[f.name]);
@@ -43,7 +43,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
                 return
             };
 
-            onSubmitHandler(formdata);
+            await onSubmitHandler(formdata);
             setFormData({});
             navigate('/');
         } catch(err){
@@ -88,7 +88,9 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler }) => {
                             )}
                         </div>
                     ))}
-                    <Button>{buttonText}</Button>
+                    <Button disabled={isSubmitting}>
+                        {isSubmitting ? "Processing..." : {isSubmitting}}
+                    </Button>
                 </div>
             </Form>
         </div>

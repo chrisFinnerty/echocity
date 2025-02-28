@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { loginFields, signupFields } from './components/Forms/fields';
 import getDomainName from '../helpers/getDomainName';
 
-const AnimatedRoutes = ({ currentUser, isLoading, signupUser, loginUser, editUserProfile} ) => {
+const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, loginUser, editUserProfile} ) => {
   const location = useLocation();
 
   return (
@@ -42,7 +42,8 @@ const AnimatedRoutes = ({ currentUser, isLoading, signupUser, loginUser, editUse
               title='Sign Up to Echocity' 
               buttonText='Sign up' 
               type='signup' 
-              onSubmitHandler={signupUser} 
+              onSubmitHandler={signupUser}
+              isSubmitting={isSubmitting}
             />}
           />
         <Route 
@@ -53,7 +54,8 @@ const AnimatedRoutes = ({ currentUser, isLoading, signupUser, loginUser, editUse
                 title='Login to Echocity' 
                 buttonText='Log In' 
                 type='login' 
-                onSubmitHandler={loginUser} 
+                onSubmitHandler={loginUser}
+                isSubmitting={isSubmitting}
             />} 
           />
         <Route 
