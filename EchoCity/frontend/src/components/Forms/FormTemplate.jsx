@@ -89,7 +89,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubm
                         </div>
                     ))}
                     <Button disabled={isSubmitting}>
-                        {isSubmitting ? "Processing..." : {isSubmitting}}
+                        {isSubmitting ? "Processing..." : buttonText}
                     </Button>
                 </div>
             </Form>

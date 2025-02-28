@@ -10,7 +10,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [theme, setTheme] = useState('light');
   const [isLoading, setIsLoading] = useState(true);
-  cosnt [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
