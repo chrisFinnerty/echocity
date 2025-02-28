@@ -12,6 +12,12 @@ import cookieParser from 'cookie-parser';
 
 configDotenv();
 
+const allowedOrigins = [
+    process.env.PRODUCTION_URL,
+    process.env.FRONTEND_URL,
+    'http://127.0.0.1:4173'
+];
+
 const app = express();
 
 const origin = process.env.NODE_ENV === 'production'
@@ -23,7 +29,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: origin,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error(`CORS policy does not allow access from origin ${origin}`));
+      }
+    },
     credentials: true
   }));
 
