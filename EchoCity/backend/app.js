@@ -12,33 +12,19 @@ import cookieParser from 'cookie-parser';
 
 configDotenv();
 
-const allowedOrigins = [
-    process.env.PRODUCTION_URL,
-    process.env.FRONTEND_URL,
-    'http://127.0.0.1:4173'
-];
-
 const app = express();
 
 const origin = process.env.NODE_ENV === 'production'
             ? process.env.PRODUCTION_URL
-            : process.env.FRONTEND_URL || 'http://127.0.0.1:4173' // npm run preview port/FE url
+            : process.env.FRONTEND_URL || 'http://localhost:5173'
 
 app.use(express.json());
 
 app.use(cookieParser());
 
 app.use(cors({
-    origin: (requestOrigin, callback) => {
-      console.log('Incoming request origin:', requestOrigin);
-      if (!requestOrigin) return callback(null, true);
-      if (allowedOrigins.includes(requestOrigin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error(`CORS policy does not allow access from origin ${requestOrigin}`));
-      }
-    },
-    credentials: true
+    origin: origin,
+    credentials: true,
 }));
 
 app.use(authenticateJWT);
