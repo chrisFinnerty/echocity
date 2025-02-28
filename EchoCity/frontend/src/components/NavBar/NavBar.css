@@ -4,10 +4,13 @@
     padding: 0rem 1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 55px;
 }
 
-#NavBar-echo-logo {
-    padding-top: 15px;
+.navbar-brand {
+    margin-left: 15px;
+    color: white;
 }
 
 .navbar-right-section {
@@ -17,9 +20,20 @@
 
 .Navbar-theme-button {
     background-color: black;
-    padding: .3rem .75rem;
-    margin-right: 0.5rem;
+    padding: .3rem .3rem;
+    margin-right: 0.2rem;
     z-index: 1100;
+    transition: all 0.3s ease;
+}
+
+.FaMoon, .FaSun, .FaDisplayToggle {
+    height: 100%;
+    margin-right: 2px;
+}
+
+.FaMoon, .FaSun {
+    width: 24px;
+    margin-right: 4px;
 }
 
 .FaMoon {
@@ -27,16 +41,8 @@
     background-color: #646cff;
 }
 
-.FaMoon, .FaSun {
-    margin-right: 4px;
-    width: 25px;
-    height: 100%;
-}
-
 .FaDisplayToggle {
-    height: 100%;
-    width: 30px;
-    margin-right: 2px;
+    width: 27px;
 }
 
 .nav-item {
@@ -45,38 +51,81 @@
 
 .nav-item a {
     color: white;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .nav-item a:hover {
     color: #646cff;
 }
 
-.navbar-brand {
-    margin-left: 15px;
-    color: white;
-}
-
+/* Mobile Styles */
 @media (max-width: 880px) {
+    .NavBar {
+        height: auto;
+        min-height: 55px;
+        flex-wrap: wrap;
+    }
+
     .navbar-right-section {
         margin-left: auto;
     }
-    
+
     .Navbar-theme-button {
         position: relative;
-        padding: 0.2rem 0.5rem;
-        margin-right: 0.5rem;
+        padding: 3.3px 8px;
     }
-    
-    .nav-item a {
-        font-size: 15px;
+
+    .FaMoon, .FaSun {
+        width: 21px;
+        margin-right: 2px;
+    }
+
+    .FaDisplayToggle {
+        width: 25px;
+        margin-right: 1px;
+    }
+
+    .collapse {
+        order: 3;
+    }
+
+    .navbar-collapse {
+        z-index: 1000;
+    }
+
+    .navbar-collapse.show {
+        background-color: black;
+        padding: 0;
+        margin: 5px 0 0 3px;
+        transition: all 0.2s ease;
+    }
+
+    .navbar-collapse.show .nav-item a {
+        font-size: 14px;
+        padding: .25rem 0;
+        display: block;
+    }
+
+    .NavBar.menu-open .Navbar-theme-button {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-right: 1rem;
+        transform: scale(1.1);
+    }
+
+    .NavBar.menu-open .FaMoon,
+    .NavBar.menu-open .FaSun,
+    .NavBar.menu-open .FaDisplayToggle {
+        margin: 0;
     }
 
     .navbar-toggler {
         margin-left: 0;
+        padding: .25rem .5rem;
     }
-    
-    .collapse {
-        order: 3;
+
+    .nav-item a {
+        font-size: 14px;
     }
 }
