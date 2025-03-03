@@ -9,8 +9,6 @@ import favoritesRoutes from './routes/favorites.js';
 import userEvents from './routes/userEvents.js';
 import { authenticateJWT } from './middleware/auth.js';
 import cookieParser from 'cookie-parser';
-import path from 'node:path';
-import { fileURLToPath } from 'url';
 
 configDotenv();
 
@@ -20,9 +18,6 @@ const origin = process.env.NODE_ENV === 'production'
             ? process.env.PRODUCTION_URL
             : process.env.FRONTEND_URL || 'http://localhost:5173'
 console.log('CORS origin set to:', origin);
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 
@@ -42,12 +37,6 @@ app.use('/api/users', usersRoutes);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/userEvents', userEvents);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-    });
-}
 
 export default app;
