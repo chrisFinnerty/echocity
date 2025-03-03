@@ -173,3 +173,48 @@
     filter: brightness(0) invert(1);
     margin-bottom: 7px;
 }
+
+@media (max-width: 768px){
+    @media (max-width: 768px) {
+
+        .EventCard-img-container {
+            width: 100px;
+            height: 100px;
+        }
+
+        .EventCard-event-name {
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+            margin-bottom: 4px;
+        }
+
+        .EventCard-details {
+          align-items: flex-start;
+          padding: 0 .25rem;
+          font-size: 12px;
+        }
+      
+        .EventCard-event-buttons-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+      
+        .EventCard-userEvents-button button,
+        .EventCard-event-url button {
+            font-size: 10px;
+          width: 100%;
+          max-width: 75px;
+          margin-bottom: 0.5rem;
+        }
+      }
+}
+
+@media (max-width: 480px){
+
+}

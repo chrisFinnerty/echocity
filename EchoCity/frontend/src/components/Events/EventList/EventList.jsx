@@ -203,19 +203,21 @@ const EventList = ({ getDomainName }) => {
                 className='filters-search-input'
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <button onClick={() => getData()}>Search</button>
-                <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)}>
-                  <option value=''>All Cities</option>
-                  {cityOptions.map((city, idx) => (
-                    <option key={idx} value={city}>{city}</option>
-                  ))}
-                </select>
-                <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
-                  <option value=''>All States</option>
-                  {stateOptions.map((state, idx) => (
-                    <option key={idx} value={state}>{state}</option>
-                  ))}
-                </select>
+              <div className='EventList-btn-filters-container'>
+                <button onClick={() => getData()}>Search</button>
+                  <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)}>
+                    <option value=''>All Cities</option>
+                    {cityOptions.map((city, idx) => (
+                      <option key={idx} value={city}>{city}</option>
+                    ))}
+                  </select>
+                  <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
+                    <option value=''>All States</option>
+                    {stateOptions.map((state, idx) => (
+                      <option key={idx} value={state}>{state}</option>
+                    ))}
+                  </select>
+              </div>
               </div>
               <div className='pagination-controls'>
                 <Link onClick={handlePrev} disabled={currentPage === 1}>
