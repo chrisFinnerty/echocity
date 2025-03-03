@@ -73,7 +73,7 @@
 .WelcomePage-features-header{
     color: #646cff;
     font-weight: 700;
-    padding: 1rem;
+    padding: .5rem;
     text-align: center;
 }
 
@@ -96,5 +96,55 @@
 
 .WelcomePage-features-row h3{
     color: #646cff;
-    margin-bottom: 20px;
+}
+
+@media (max-width: 820px){
+    .WelcomePage h1{
+        font-size: 17px;
+    }
+    .WelcomePage h2{
+        font-size: 14px;
+    }
+    .WelcomePage p{
+        font-size: 10px;
+    }
+    .WelcomePage-intro-container{
+        height: 200px;
+        max-width: 75%;
+    }
+
+    .WelcomePage-cta-button {
+        margin: 0 5px;
+        height: 25px;
+    }
+
+    .WelcomePage-cta-login-container{
+        font-size: 11px;
+    }
+
+    .WelcomePage-cta{
+        font-size: 11px;
+    }
+
+    .WelcomePage-features-container{
+        height: 200px;
+        max-width: 75%;
+        margin: 0 auto;
+    }
+
+    .WelcomePage-features-row{
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        width: 90%;
+    }
+
+    .WelcomePage-features-concerts,
+    .WelcomePage-features-artists,
+    .WelcomePage-features-tracking {
+        padding: .5rem;
+        margin: 5px 10px;
+        border: 2px solid;
+    }
+
 }

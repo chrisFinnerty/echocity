@@ -17,8 +17,15 @@
     gap: 10px;
   }
 
+  .EventList-btn-filters-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+
   .filters-search-input{
-    width: 100%
+    width: 100%;
   }
   
   .filters input {
@@ -31,6 +38,7 @@
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    margin-left: 10px;
   }
 
   .pagination-controls{
@@ -60,4 +68,50 @@
 
 .error {
     color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .EventList {
+    padding: 0.5rem 1rem;
+    max-width: 100%;
+  }
+
+  .EventList h2{
+    font-size: 18px;
+  }
+
+  .filters {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: .2rem;
+  }
+
+  .filters button {
+    font-size: 13px;
+    padding: .4rem .5rem;
+  }
+
+  .filters-search-input,
+  .filters select,
+  .filters input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 33px;
+  }
+
+  .pagination-controls {
+    flex-direction: row;
+    font-size: 14px;
+  }
+
+  .pagination-controls a {
+    padding: 0.5rem 1rem;
+  }
+
+  .EventList-date-group h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
 }

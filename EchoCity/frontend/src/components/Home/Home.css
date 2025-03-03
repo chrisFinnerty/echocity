@@ -40,14 +40,17 @@
 
 .favorites-slider {
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
+}
+
+.Home-favorites-concert-container{
+    border: 2px white solid;
 }
 
 .Home-favorites-concerts-row {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     border: 2px white solid;
     transition: transform 0,3s ease-in-out;
 }
@@ -55,7 +58,7 @@
 .Home-artist-img-container {
     width: 100%;
     height: 200px;
-    margin-bottom: 1rem;
+    margin-bottom: .2rem;
     overflow: hidden;
 }
 
@@ -73,9 +76,11 @@
     align-items: flex-start;
     padding: 1rem;
     flex: 0 0 calc(100% / 4);
+    width: 100%;
 }
 
 .Home-favorites-artist-concert h3{
+    font-size: 1.25rem;
     margin: 0.5rem 0;
     width: 100%;
     text-align: left;
@@ -92,13 +97,7 @@
 .Home a h3 {
     color: white;
 }
-
-.favorites-slider {
-    width: 100%; 
-    overflow: hidden;
-    position: relative;
-  }
-  
+ 
   .Home-favorites-concerts-row {
     display: flex;
     transition: transform 0.3s ease-in-out;
@@ -116,6 +115,7 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     margin-right: 15px;
+    margin-bottom: 7px;
   }
   
   .favorites-slider-nav button:disabled {
@@ -136,4 +136,68 @@
     padding: 0.5rem 0;
     border-bottom: 1px solid #444;
   }
+
+  @media (max-width: 820px){
+  .Home-header {
+    margin-bottom: .75rem;
+  }
+  
+  .Home h1 {
+    font-size: 2rem;
+  }
+  .Home h3 {
+    font-size: 1.6rem;
+  }
+
+  .Home-artist-img-container {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .Home-favorites-concerts-row {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .Home-favorites-artist-concert {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+  }
+  
+  @media (max-width: 700px){
+    .Home h1 {
+        font-size: 1.5rem;
+      }
+    .Home h3 {
+        font-size: .9rem;
+        width: 100%;
+        margin-right: 0px;
+      }
+
+      .favorites-slider-nav button {
+        font-size: 12px;
+        padding: .4rem;
+      }
+    
+      .Home-artist-img-container {
+        height: 200px;
+      }
+
+      .Home-favorites-concerts-row {
+        flex-direction: column;
+      }
+    
+      .Home-favorites-artist-concert {
+        flex: 0 0 100%;
+        padding-top: .5rem;
+        padding-bottom: 0rem;
+      }
+
+      .Home-concert-item{
+        font-size: 12px;
+      }
+
+  }
+  
   
