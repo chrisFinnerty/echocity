@@ -1,16 +1,20 @@
 .NavBar {
-    border-bottom: 2.5px solid rgb(255, 255, 255);
+    border-bottom: 2.5px solid rgb(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     background-color: rgb(0, 0, 0);
-    padding: 0rem 1rem;
+    padding: 0rem .5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 55px;
+    flex-wrap: nowrap;
+    /* height: 55px; */
+    min-height: 55px;
 }
 
 .navbar-brand {
     margin-left: 15px;
     color: white;
+    margin: 0;
 }
 
 .navbar-right-section {
@@ -28,7 +32,6 @@
 
 .FaMoon, .FaSun, .FaDisplayToggle {
     height: 100%;
-    margin-right: 2px;
 }
 
 .FaMoon, .FaSun {
@@ -46,7 +49,7 @@
 }
 
 .nav-item {
-    margin-left: 7px;
+    margin-left: 5px;
 }
 
 .nav-item a {
@@ -58,16 +61,30 @@
     color: #646cff;
 }
 
-/* Mobile Styles */
 @media (max-width: 880px) {
     .NavBar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         height: auto;
-        min-height: 55px;
-        flex-wrap: wrap;
+    }
+
+    #NavBar-echo-logo svg {
+        height: 32px;
+        width: auto;
+        display: block;
+      }
+
+    .navbar-brand {
+        margin-left: 0.5rem;
+        order: 1;
     }
 
     .navbar-right-section {
         margin-left: auto;
+        display: flex;
+        align-items: center;
+        order: 2;
     }
 
     .Navbar-theme-button {
@@ -82,20 +99,20 @@
 
     .FaDisplayToggle {
         width: 25px;
-        margin-right: 1px;
     }
 
-    .collapse {
+    /* .collapse {
         order: 3;
-    }
+        width: 100%;
+    } */
 
     .navbar-collapse {
         z-index: 1000;
     }
 
     .navbar-collapse.show {
+        display: block;
         background-color: black;
-        padding: 0;
         margin: 5px 0 0 3px;
         transition: all 0.2s ease;
     }
@@ -123,6 +140,13 @@
     .navbar-toggler {
         margin-left: 0;
         padding: .25rem .5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-toggler-icon {
+        height: 18px;
+        width: 18px;
     }
 
     .nav-item a {
