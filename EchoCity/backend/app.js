@@ -9,6 +9,7 @@ import favoritesRoutes from './routes/favorites.js';
 import userEvents from './routes/userEvents.js';
 import { authenticateJWT } from './middleware/auth.js';
 import cookieParser from 'cookie-parser';
+import path from 'node:path';
 
 configDotenv();
 
@@ -36,5 +37,14 @@ app.use('/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/userEvents', userEvents);
+
+if (process.env.NODE_ENV === 'production') {
+    const __dirname = path.resolve();
+    app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+    });
+}
 
 export default app;
