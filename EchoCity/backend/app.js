@@ -10,6 +10,7 @@ import userEvents from './routes/userEvents.js';
 import { authenticateJWT } from './middleware/auth.js';
 import cookieParser from 'cookie-parser';
 import path from 'node:path';
+import { fileURLToPath } from 'url';
 
 configDotenv();
 
@@ -39,11 +40,10 @@ app.use('/api/favorites', favoritesRoutes);
 app.use('/api/userEvents', userEvents);
 
 if (process.env.NODE_ENV === 'production') {
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, 'client', 'dist')));
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+        res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
     });
 }
 
