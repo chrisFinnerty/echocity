@@ -10,6 +10,7 @@ import userEvents from './routes/userEvents.js';
 import { authenticateJWT } from './middleware/auth.js';
 import cookieParser from 'cookie-parser';
 import path from 'node:path';
+import { fileURLToPath } from 'url';
 
 configDotenv();
 
