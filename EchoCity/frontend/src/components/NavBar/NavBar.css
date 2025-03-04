@@ -118,8 +118,8 @@
     }
 
     .navbar-collapse.show .nav-item a {
-        font-size: 14px;
-        padding: .25rem 0;
+        font-size: 12px;
+        padding: .2rem 0;
         display: block;
     }
 
@@ -147,9 +147,5 @@
     .navbar-toggler-icon {
         height: 18px;
         width: 18px;
-    }
-
-    .nav-item a {
-        font-size: 14px;
     }
 }

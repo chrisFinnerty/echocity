@@ -110,6 +110,11 @@
 }
 
 .EventCard-event-buttons-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    /* gap: 1rem; */
     margin-bottom: 10px;
 }
 
@@ -145,7 +150,7 @@
 }
 
 .EventCard-event-url {
-    margin-top: 1.4rem;
+    /* margin-top: 1.4rem; */
 }
 
 .EventCard-event-url button {
@@ -175,46 +180,126 @@
 }
 
 @media (max-width: 768px){
-    @media (max-width: 768px) {
+    .EventCard-card{
+        height: auto;
+    }
+    .EventCard-img-header-container{
+        flex-wrap: wrap;
+        height: auto;
+        align-items: flex-start;
+        gap: 0rem;
+    }
 
-        .EventCard-img-container {
-            width: 100px;
-            height: 100px;
-        }
+    .EventCard-img-container {
+        width: 90px;
+        height: 90px;
+    }
+    .EventCard-details {
+        align-items: flex-start;
+        padding: 0 .25rem;
+        font-size: 12px;
+    }
 
-        .EventCard-event-name {
-            font-size: 16px;
-            font-weight: bold;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            width: 100%;
-            margin-bottom: 4px;
-        }
+    .EventCard-event-name {
+        font-size: 16px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        margin-bottom: 4px;
+    }
 
-        .EventCard-details {
-          align-items: flex-start;
-          padding: 0 .25rem;
-          font-size: 12px;
-        }
-      
-        .EventCard-event-buttons-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-bottom: 1rem;
-        }
-      
-        .EventCard-userEvents-button button,
-        .EventCard-event-url button {
-            font-size: 10px;
-          width: 100%;
-          max-width: 75px;
-          margin-bottom: 0.5rem;
-        }
-      }
+    .EventCard-artists button {
+        font-size: 12px;
+    }
+    
+    .EventCard-event-buttons-container {
+        flex-basis: 100%;
+        order: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 0rem;
+        margin-top: .25rem;
+    }
+
+    .EventCard-userEvents-button{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .EventCard-event-url{
+        width: 90px;
+    }
+
+    .EventCard-userEvents-button button,
+    .EventCard-event-url button {
+        font-size: 12px;
+        height: 2.2rem;
+        width: 100%;
+        /* padding: 0rem .2rem; */
+    }
 }
 
 @media (max-width: 480px){
+    .EventCard-card{
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    .EventCard-img-header-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .EventCard-img-container {
+        width: 75px;
+        height: 75px;
+        margin-right: 1.7rem;
+        margin-top: 0px;
+    }
+
+    .EventCard-details{
+        font-size: 12px;
+    }
+
+    .date-icon {
+        margin-right: 4px;
+        margin-bottom: 7px;
+        height: 20px;
+    }
+
+    .EventCard-event-buttons-container {
+        flex-basis: 100%;
+        order: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: .5rem;
+    }
+
+    .EventCard-event-url{
+        width: 75px;
+    }
+
+
+    .EventCard-userEvents-button button,
+    .EventCard-event-url button {
+        font-size: 9px;
+        height: 1.7rem;
+        width: 100%;
+    }
+
+    .EventCard-event-url button{
+        width: 75px;
+    }
+
 
 }

@@ -8,7 +8,7 @@ import './NavBar.css';
 import Loader from '../Loader/Loader';
 
 const NavBar = ({ logout, isLoading }) => {
-    const {currentUser, theme, toggleTheme } = useContext(Context);
+    const { currentUser, theme, toggleTheme } = useContext(Context);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(prev => !prev);
