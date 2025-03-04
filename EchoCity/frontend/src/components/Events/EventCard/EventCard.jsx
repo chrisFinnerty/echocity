@@ -83,14 +83,14 @@ const EventCard = ({ eventId, eventName, artists, eventDate, venueName, city, st
                                         {isAttended ? <FaCalendarCheck color='green' /> : <FaRegCalendarTimes color='red'/>} <span>Attended</span>
                                     </button>     
                                 }
+                                <a className='EventCard-event-url' href={eventUrl} target='_blank' rel='noopener noreferrer'>
+                                    <button>{ticketSource}</button>
+                                </a>
                         </div>
-                        <a className='EventCard-event-url' href={eventUrl} target='_blank' rel='noopener noreferrer'>
-                            <button>{ticketSource}</button>
-                        </a>
                     </div>
-                </div>
             </div>
         </div>
+    </div>
     )
 }
 
