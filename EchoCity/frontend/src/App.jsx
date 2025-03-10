@@ -125,6 +125,7 @@ function App() {
             signupUser={signupUser}
             loginUser={loginUser}
             error={error}
+            setError={setError}
             editUserProfile={editUserProfile}
           />
         </Context.Provider>

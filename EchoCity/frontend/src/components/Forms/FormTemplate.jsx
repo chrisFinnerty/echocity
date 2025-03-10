@@ -91,7 +91,7 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubm
                                         onChange={handleChange}
                                         value={formdata[field.name] || ""}
                                     />
-                                    {field.name === 'password' && <p><i>Passwords must be at least 8 characters long.</i></p>}
+                                    {field.name === 'password' && type === 'signup' && <p><i>Passwords must be at least 8 characters long.</i></p>}
                             </>
                             )}
                         </div>

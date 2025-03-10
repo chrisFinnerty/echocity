@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import FadeInWrapper from './components/z_helpers/FadeInWrapper/FadeInWrapper';
 
@@ -16,8 +17,12 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { loginFields, signupFields } from './components/Forms/fields';
 import getDomainName from '../helpers/getDomainName';
 
-const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, loginUser, error, editUserProfile} ) => {
+const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, loginUser, error, setError, editUserProfile} ) => {
   const location = useLocation();
+
+  useEffect(() => {
+    setError(null);
+  }, [location.pathname]);
 
   return (
     <FadeInWrapper key={location.pathname}>

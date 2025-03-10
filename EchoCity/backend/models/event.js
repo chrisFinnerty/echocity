@@ -37,12 +37,11 @@ class Event {
               ($3::text IS NULL OR $3 ILIKE ANY(a.genre)) AND
               ($4::text IS NULL OR $4 ILIKE ANY(a.subgenre)) AND
               ($5::text IS NULL OR 
-                e.name ILIKE '%' || $5 || '%' OR
-                e.name ILIKE '%' || $5 || '%' OR
-                v.name ILIKE '%' || $5 || '%' OR
-                v.city ILIKE '%' || $5 || '%' OR
-                v.state ILIKE '%' || $5 || '%' OR
-                a.name ILIKE '%' || $5 || '%')
+                e.name ILIKE CONCAT('%', $5, '%') OR
+                v.name ILIKE CONCAT('%', $5, '%') OR
+                v.city ILIKE CONCAT('%', $5, '%') OR
+                v.state ILIKE CONCAT('%', $5, '%') OR
+                a.name ILIKE CONCAT('%', $5, '%'))
             GROUP BY e.id, v.id
             ORDER BY e.date
           `;
