@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import UsersAPI from '../../../api/UsersAPI';
 import { formatDateMY } from '../../../../helpers/formatDate';
+import Loader from '../../Loader/Loader.jsx';
 import './Profile.css';
 
 const Profile = () => {
@@ -33,7 +34,7 @@ const Profile = () => {
 
     document.title = `Echocity | My Profile`;
 
-    if(isLoading) return <div>Loading profile...</div>
+    if(isLoading) return <Loader />;
     if(error) return <div>Sorry, an error occurred: {error}</div>
 
     return (

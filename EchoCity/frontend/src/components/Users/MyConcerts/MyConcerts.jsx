@@ -4,6 +4,7 @@ import Context from "../../Context.jsx";
 import EventCard from "../../Events/EventCard/EventCard.jsx";
 import UserEvents from "../../../api/UserEventsAPI.js";
 import FavoritesAPI from "../../../api/FavoritesAPI.js";
+import Loader from '../../Loader/Loader.jsx';
 import './MyConcerts.css';
 
 const MyConcerts = ({ getDomainName }) => {
@@ -126,7 +127,7 @@ const MyConcerts = ({ getDomainName }) => {
         }
       };
     
-    if(isLoading) return <div className='isLoading'>Loading My Concerts...</div>;
+    if(isLoading) return <Loader />;
 
     if(error) return <div className='error'>Error: {error}</div>;
 
