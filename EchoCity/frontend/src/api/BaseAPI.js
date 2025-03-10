@@ -20,8 +20,9 @@ class BaseAPI {
             return axiosRes.data;
         } catch(err){
             console.error("API Error", err.response);
-            let message = err?.response?.data?.error?.message || err.message;
-            throw new Error(message);
+            throw err;
+            // let message = err?.response?.data?.error?.message || err.message;
+            // throw new Error(message);
         }
     }
 

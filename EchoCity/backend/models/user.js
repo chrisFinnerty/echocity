@@ -44,6 +44,10 @@ class User {
             throw new Error(`Duplicate email: ${email}`)
         };
 
+        if(password.length < 8){
+            throw new Error("Passwords must be at least 8 characters long.")
+        };
+
         const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
         const result = await db.query(
@@ -95,7 +99,7 @@ class User {
             }
         }
 
-        throw new Error(`Invalid email/password`)
+        throw new Error(`Invalid email/password`);
     }
 
     // Finds a user based on their username
