@@ -37,9 +37,23 @@ router.post('/signup', async function(req, res, next){
             maxAge: 10 * 24 * 60 * 60 * 1000, // cookie expires in 10 days
         });
 
-        return res.status(201).json({ data: { user: newUser, token } })
+        return res.status(201).json({ data: { user: newUser, token } });
     } catch(err){
         console.error("Error registering:", err);
+
+        if(err.message.includes("Duplicate username")){
+            return res.status(409).json({ error: `Username "${req.body.username}" already exists!` });
+        };
+
+        if(err.message.includes("Duplicate email")){
+            return res.status(409).json({ error: `Email "${req.body.email}" already exists!` })
+        };
+
+        if(err.message.includes("Passwords must be at least 8 characters long.")){
+            return res.status(403).json({ error: "Passwords must be at least 8 characters long." })
+        };
+
+        return next();
     }
 });
 
@@ -68,6 +82,7 @@ router.post('/login', async function(req, res, next) {
         return res.json({ data: { user, token } });
     } catch(err){
         console.error(err);
+        return res.status(401).json({ error: `Invalid username/password` });
     }
 })
 

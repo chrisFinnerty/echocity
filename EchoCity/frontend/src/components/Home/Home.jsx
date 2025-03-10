@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Context from '../Context';
 import Loader from '../Loader/Loader.jsx';
+import HomeCard from './HomeCard.jsx';
 import TicketMasterAPI from '../../api/ticketmasterAPI.js';
 import FavoritesAPI from '../../api/FavoritesAPI.js';
 import './Home.css';
@@ -28,7 +29,7 @@ const Home = () => {
 
                 let artistsWithEvents = [];
                 if(favoriteArtists.length > 0){
-                    const aritstPromises = favoriteArtists.map( async(fav) => {
+                    const artistPromists = favoriteArtists.map( async(fav) => {
                         try{
                             const artist = await TicketMasterAPI.getArtist(fav.artistId);
                             const events = await TicketMasterAPI.getEventsByArtistId(fav.artistId);
@@ -40,7 +41,7 @@ const Home = () => {
                         }
                     });
 
-                    const artistResults = await Promise.allSettled(aritstPromises);
+                    const artistResults = await Promise.allSettled(artistPromists);
                     artistsWithEvents = artistResults.filter(res => res.status === 'fulfilled' && res.value !== null).map(res => res.value);
                 }
 
@@ -87,7 +88,7 @@ const Home = () => {
                     {favoriteArtistsWithEvents.length === 0 ? (
                         <div className="Home-favorites-concerts-info">
                             <p>No artists favorited yet?</p>
-                            <p>Head over to the <a href='/concerts'>Discover</a> page!</p>
+                            <p>Head over to the <Link to='/concerts'>Discover</Link> page!</p>
                         </div>
                     ) : null}
                 </div>
@@ -104,31 +105,13 @@ const Home = () => {
                     )}
                     <div className="Home-favorites-concerts-row">
                         {displayedArtists.map(({ artist, events }) => (
-                            <div key={artist.id} className='Home-favorites-artist-concert'>
-                                <div className='Home-artist-img-container'>
-                                    <img src={artist.imageUrl} alt={`${artist.name}'s profile picture`} />
-                                </div>
-                                <h3>{artist.name}</h3>
-                                <div className="Home-concerts-list" key={artist.id}>
-                                    {events.length > 0 ? (
-                                        events.map(event => (
-                                            <div key={event.eventId} className="Home-concert-item">
-                                                <Link to={`/concerts/${event.eventId}`}>
-                                                    <ul>
-                                                        <li>{event.venueName}</li>
-                                                        <li>{new Date(event.eventDate).toLocaleDateString()}</li>
-                                                        <li>{event.city}, {event.state}</li>
-                                                    </ul>
-                                                </Link>
-                                            </div>
-                                        ))
-                                        
-                                    ) : (
-                                        <p>No upcoming events for this artist.</p>
-                                    )}
-                                    <Link to={`/artists/${artist.id}`}><h5>View all concerts</h5></Link>
-                                </div>
-                            </div>
+                            <HomeCard 
+                                key={artist.id}
+                                artistId={artist.id}
+                                artistName={artist.name}
+                                artistImageUrl={artist.imageUrl}
+                                events={events}
+                            />
                         ))}
                     </div>
                 </div>

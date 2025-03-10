@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 import usStates from '../../../helpers/usStates';
 import './FormTemplate.css';
 
-const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubmitting }) => {
+const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubmitting, error }) => {
     const {currentUser} = useContext(Context);
     const navigate = useNavigate();
     const [formdata, setFormData] = useState({});
@@ -43,21 +43,24 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubm
                 alert("Pleae fill in all required fields.");
                 return
             };
-
-            await onSubmitHandler(formdata);
-            setFormData({});
-            navigate('/');
+            const res = await onSubmitHandler(formdata);
+            if(res){
+                setFormData({});
+                navigate('/');
+            };
         } catch(err){
             console.error(err);
+            throw err;
         }
     };
 
     return (
         <div className='FormTemplate'>
-            {isSubmitting && <Loader />}
+            {isSubmitting && !error && <Loader />}
             <Form className='FormTemplate-form' onSubmit={handleSubmit}>
                 <div className='FormTemplate-signup-container'>
                     <h1>{title}</h1>
+                    {error && <p className="error">{error}</p>}
                     {fields.map((field, idx) => (
                         <div className='FormTemplate-field' key={idx}>
                             <Label htmlFor={field.name}>{field.label}</Label>
@@ -77,16 +80,19 @@ const FormTemplate = ({ fields, title, buttonText, type, onSubmitHandler, isSubm
                                     ))}
                                 </select>
                             ) : (
-                                <Input 
-                                    name={field.name}
-                                    id={field.name}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    required={field.required}
-                                    disabled={field.disabled}
-                                    onChange={handleChange}
-                                    value={formdata[field.name] || ""}
-                                />
+                                <>
+                                    <Input 
+                                        name={field.name}
+                                        id={field.name}
+                                        type={field.type}
+                                        placeholder={field.placeholder}
+                                        required={field.required}
+                                        disabled={field.disabled}
+                                        onChange={handleChange}
+                                        value={formdata[field.name] || ""}
+                                    />
+                                    {field.name === 'password' && type === 'signup' && <p><i>Passwords must be at least 8 characters long.</i></p>}
+                            </>
                             )}
                         </div>
                     ))}

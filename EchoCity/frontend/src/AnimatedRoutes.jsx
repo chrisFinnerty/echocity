@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import FadeInWrapper from './components/z_helpers/FadeInWrapper/FadeInWrapper';
 
@@ -16,8 +17,12 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { loginFields, signupFields } from './components/Forms/fields';
 import getDomainName from '../helpers/getDomainName';
 
-const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, loginUser, editUserProfile} ) => {
+const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, loginUser, error, setError, editUserProfile} ) => {
   const location = useLocation();
+
+  useEffect(() => {
+    setError(null);
+  }, [location.pathname]);
 
   return (
     <FadeInWrapper key={location.pathname}>
@@ -41,7 +46,8 @@ const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, logi
               fields={signupFields} 
               title='Sign Up to Echocity' 
               buttonText='Sign up' 
-              type='signup' 
+              type='signup'
+              error={error}
               onSubmitHandler={signupUser}
               isSubmitting={isSubmitting}
             />}
@@ -53,7 +59,8 @@ const AnimatedRoutes = ({ currentUser, isLoading, isSubmitting, signupUser, logi
                 fields={loginFields} 
                 title='Login to Echocity' 
                 buttonText='Log In' 
-                type='login' 
+                type='login'
+                error={error}
                 onSubmitHandler={loginUser}
                 isSubmitting={isSubmitting}
             />} 

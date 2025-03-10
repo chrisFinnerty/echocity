@@ -9,6 +9,7 @@ import './App.css'
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [theme, setTheme] = useState('light');
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -43,12 +44,21 @@ function App() {
 
   const signupUser = async (data) => {
     try{
+      setError(null);
       setIsSubmitting(true);
       // UsersAPI.signup returns { user, token } objects
       const { user, token } = await UsersAPI.signup(data);
       onAuthSuccess(user, token);
+      return { user, token };
     } catch(err){
-      console.error("Error signing up:", err)
+      console.error("Error signing up:", err);
+
+      if(err.response && (err.response.status === 409 || err.response.status === 403)) {
+        setError(err.response.data.error);
+      } else {
+        setError("Signup failed. Please try again.");
+      };
+
     } finally{
       setIsSubmitting(false);
     }
@@ -56,11 +66,20 @@ function App() {
 
   const loginUser = async (data) => {
     try{
+      setError(null);
       setIsSubmitting(true);
       const { user, token } = await UsersAPI.login(data);
       onAuthSuccess(user, token);
+      return { user, token };
     } catch(err){
-      console.error("Login error:", err)
+      console.error("Login error:", err);
+
+      if(err.response && err.response.status === 401){
+        setError(err.response.data.error);
+      } else{
+        setError(`Error logging in. Please try again.`);
+      };
+
     } finally{
       setIsSubmitting(false);
     }
@@ -105,6 +124,8 @@ function App() {
             isSubmitting={isSubmitting}
             signupUser={signupUser}
             loginUser={loginUser}
+            error={error}
+            setError={setError}
             editUserProfile={editUserProfile}
           />
         </Context.Provider>

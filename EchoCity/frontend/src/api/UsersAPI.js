@@ -11,6 +11,7 @@ class UsersAPI extends BaseAPI {
             return res.data;
         } catch(err){
           console.error(err);
+          throw err;
         }
       }
   
@@ -24,6 +25,7 @@ class UsersAPI extends BaseAPI {
           return res.data;
         } catch(err){
           console.error(err);
+          throw err;
         }
       };
 
