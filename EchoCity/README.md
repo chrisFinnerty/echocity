@@ -43,7 +43,8 @@ Echocity is designed for:
 
 ## Live Demo
 
-Check out the live demo of Echocity on [Render](https://echocity.onrender.com/)
+<!-- Check out the live demo of Echocity on [Render](https://echocity.onrender.com/) -->
+<!-- Removed Render link on 10/5/2026. Can still access app link on Render login -->
 
 ## Project Breakdown
 
